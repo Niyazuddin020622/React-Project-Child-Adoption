@@ -64,7 +64,6 @@ const About = () => {
           <h2 className="text-center fw-bold mb-5">Why Choose Us?</h2>
           <div className="row text-center g-4">
             <div className="col-md-4">
-              
               <i className="bi bi-heart-fill text-danger display-1"></i>
               <h5 className="mt-3 fw-bold">Compassionate Support</h5>
               <p className="text-muted fs-6">
