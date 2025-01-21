@@ -47,6 +47,7 @@ const About = () => {
               ready to embrace the joy of parenthood.
             </p>
           </div>
+
           <div className="col-md-6 text-center">
             <img
               src="https://img.freepik.com/free-photo/family-with-cute-kids-autumn-park_1157-26549.jpg?t=st=1737368825~exp=1737372425~hmac=d8f34df0cd21c6547c77d06b6ba2768d6938e05bac4ed0fad9e9da0c088fac3a&w=1060"
@@ -63,6 +64,7 @@ const About = () => {
           <h2 className="text-center fw-bold mb-5">Why Choose Us?</h2>
           <div className="row text-center g-4">
             <div className="col-md-4">
+              
               <i className="bi bi-heart-fill text-danger display-1"></i>
               <h5 className="mt-3 fw-bold">Compassionate Support</h5>
               <p className="text-muted fs-6">
