@@ -1,9 +1,14 @@
 import React from "react";
+<<<<<<< HEAD
 import "../CSS/Navbar.css";
+=======
+import "../CSS/nav.css";
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
+<<<<<<< HEAD
     <nav
       className="navbar navbar-expand-lg navbar-light"
       style={{
@@ -12,6 +17,9 @@ const Navbar = () => {
         animation: "gradientBG 8s ease infinite",
       }}
     >
+=======
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
       <div className="container">
         <Link className="navbar-brand" to="/">
           <img
@@ -34,38 +42,66 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
             <li className="nav-item">
+<<<<<<< HEAD
               <Link className="nav-link text-white" to="/">
+=======
+              <Link className="nav-link text-orange" to="/">
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
                 Home
               </Link>
             </li>
             <li className="nav-item">
+<<<<<<< HEAD
               <Link className="nav-link text-white" to="/about">
+=======
+              <Link className="nav-link text-orange" to="/about">
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
                 About
               </Link>
             </li>
             <li className="nav-item">
+<<<<<<< HEAD
               <Link className="nav-link text-white" to="/contact">
+=======
+              <Link className="nav-link text-orange" to="/contact">
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
                 Contact_Us
               </Link>
             </li>
             <li className="nav-item">
+<<<<<<< HEAD
               <Link className="nav-link text-white" to="/available-children">
+=======
+              <Link className="nav-link text-orange" to="/available-children">
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
                 Available_Children
               </Link>
             </li>
             <li className="nav-item">
+<<<<<<< HEAD
               <Link className="nav-link text-white" to="/adoption-resources">
+=======
+              <Link className="nav-link text-orange" to="/adoption-resources">
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
                 Adoption_Resources
               </Link>
             </li>
             <li className="nav-item">
+<<<<<<< HEAD
               <Link className="nav-link text-white" to="/donate">
+=======
+              <Link className="nav-link text-orange" to="/donate">
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
                 Donate
               </Link>
             </li>
             <li className="nav-item dropdown">
               <a
+<<<<<<< HEAD
                 className="nav-link dropdown-toggle text-white"
+=======
+                className="nav-link dropdown-toggle text-orange"
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -110,15 +146,24 @@ const Navbar = () => {
               placeholder="Search"
               aria-label="Search"
             />
+<<<<<<< HEAD
             <button className="btn btn-outline-light" type="submit">
               Search
             </button>
           </form>
           <button className="btn btn-light ms-3" type="button">
+=======
+            <button className="btn btn-outline-orange" type="submit">
+              Search
+            </button>
+          </form>
+          <button className="btn btn-orange ms-3" type="button">
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
             Login
           </button>
         </div>
       </div>
+<<<<<<< HEAD
 
       {/* Keyframes for Gradient Animation */}
       <style>{`
@@ -128,6 +173,8 @@ const Navbar = () => {
           100% { background-position: 0% 50%; }
         }
       `}</style>
+=======
+>>>>>>> 2e261e8781d08f5385685bc9e217a35fde08f806
     </nav>
   );
 };
