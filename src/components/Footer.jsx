@@ -10,10 +10,10 @@ const Footer = () => {
           {/* Grid column */}
           <div className="col-lg-4 col-md-12 mb-4 mb-md-0">
             <h5 className="text-uppercase mb-4">About company</h5>
-            <p>
+            <p  style={{ color: "white" }}>
               LittleHaven is a compassionate and trusted child adoption organization dedicated to connecting children in need with loving families. We strive to create a safe haven for every child, ensuring they grow up in a nurturing and supportive environment. 
             </p>
-            <p>
+            <p style={{ color: "white" }}>
               With a mission to build stronger communities through love and care, LittleHaven guides families through the adoption process with integrity and empathy. Our goal is to bring hope, happiness, and a brighter future to every child we serve..
             </p>
 

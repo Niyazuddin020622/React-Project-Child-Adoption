@@ -1,11 +1,18 @@
-import React from "react";
-import "../CSS/nav.css";
+
+import "../CSS/nav.css"; // Ensure you have this file in your project
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container">
+    <nav
+      className="navbar navbar-expand-lg navbar-light"
+      style={{
+        background: "linear-gradient(45deg, #1e3c72, #2a5298, #1e3c72)",
+        backgroundSize: "300% 300%",
+        animation: "gradientBG 8s ease infinite",
+      }}
+    >
+      <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img
             src="https://static.vecteezy.com/system/resources/previews/021/955/473/original/happy-family-symbol-icon-logo-design-vector.jpg"
@@ -25,40 +32,40 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+          <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link text-orange" to="/">
+              <Link className="nav-link text-white" to="/">
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-orange" to="/about">
+              <Link className="nav-link text-white" to="/about">
                 About
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-orange" to="/contact">
-                Contact_Us
+              <Link className="nav-link text-white" to="/contact">
+                Contact Us
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-orange" to="/available-children">
-                Available_Children
+              <Link className="nav-link text-white" to="/adoption-resources">
+                Adoption Resources
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-orange" to="/adoption-resources">
-                Adoption_Resources
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-orange" to="/donate">
+              <Link className="nav-link text-white" to="/donates">
                 Donate
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/gallery">
+                Gallery
               </Link>
             </li>
             <li className="nav-item dropdown">
               <a
-                className="nav-link dropdown-toggle text-orange"
+                className="nav-link dropdown-toggle text-white"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -96,22 +103,37 @@ const Navbar = () => {
               </ul>
             </li>
           </ul>
-          <form className="d-flex align-items-center">
+
+          <form
+            className="d-flex align-items-center ms-auto"
+            style={{ marginRight: "50px" }}
+          >
             <input
-              className="form-control me-2 search-bar"
+              className="form-control me-2 ms-5 ms-md-0 search-bar"
               type="search"
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-orange" type="submit">
+            <button
+              className="btn btn-outline-light ms-5 ms-md-0 mb-3 mb-sm-0"
+              type="submit"
+            >
               Search
             </button>
           </form>
-          <button className="btn btn-orange ms-3" type="button">
+
+          <button className="btn btn-light " type="button">
             Login
           </button>
         </div>
       </div>
+      <style>{`
+        @keyframes gradientBG {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
     </nav>
   );
 };
