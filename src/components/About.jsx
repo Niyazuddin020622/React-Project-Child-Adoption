@@ -2,6 +2,9 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../CSS/About.css";
+import about1 from  "../assets/about1.jpg";
+import about2 from  "../assets/about2.jpg";
+import about4 from  "../assets/about4.jpg";
 
 const About = () => {
   return (
@@ -30,6 +33,7 @@ const About = () => {
           "The best way to find yourself is to lose yourself in the service of
           others." – Mahatma Gandhi
         </blockquote>
+        
         <button className="btn btn-primary mt-3">
           Learn More About Our Mission
         </button>
@@ -44,13 +48,30 @@ const About = () => {
               At <strong>Hope & Home Adoption Services</strong>, we believe
               every child deserves a loving and caring family. Our mission is to
               bridge the gap between children in need of homes and families
-              ready to embrace the joy of parenthood.
+              ready to embrace the joy of parenthood. We strive to offer
+              children the hope of a brighter future by connecting them with
+              families who can provide stability, love, and care.
+            </p>
+            <p className="text-muted fs-5">
+              We understand that adoption is a life-changing decision, and we
+              are committed to supporting both prospective parents and children
+              throughout the entire process. With a focus on compassion,
+              integrity, and transparency, we aim to create a community where
+              families and children find the love and support they deserve.
+            </p>
+            <p className="text-muted fs-5">
+              Our dedicated team works closely with families to provide
+              guidance, resources, and personalized care to ensure the adoption
+              process is as seamless and supportive as possible. Whether it's
+              answering questions, providing counseling, or offering
+              post-adoption support, we are here every step of the way to make
+              sure both the children and families feel safe and secure in their
+              new journey together.
             </p>
           </div>
-
           <div className="col-md-6 text-center">
             <img
-              src="https://img.freepik.com/free-photo/family-with-cute-kids-autumn-park_1157-26549.jpg?t=st=1737368825~exp=1737372425~hmac=d8f34df0cd21c6547c77d06b6ba2768d6938e05bac4ed0fad9e9da0c088fac3a&w=1060"
+              src={about1}
               alt="Mission"
               className="img-fluid rounded shadow-lg"
             />
@@ -99,7 +120,7 @@ const About = () => {
             <div className="team-card position-relative">
               <img
                 src="https://img.freepik.com/premium-photo/image-happy-young-excited-emotional-man-posing-isolated-white-wall-showing-okay-gesture-sitting-floor_171337-102639.jpg?w=1060"
-                alt="Team Member"
+                alt="John Doe"
                 className="img-fluid shadow-lg team-img"
               />
               <div className="team-details text-center p-3">
@@ -116,8 +137,8 @@ const About = () => {
           <div className="col-md-4">
             <div className="team-card position-relative">
               <img
-                src="https://img.freepik.com/free-photo/expressive-girl-is-posing-studio_176474-59350.jpg?t=st=1737373399~exp=1737376999~hmac=c82e930d040aa415845d0a3a714ee49c5373e6fd9e6eaf6f774acd31afbc4cf2&w=1060"
-                alt="Team Member"
+                src={about2}
+                alt="Jane Smith"
                 className="img-fluid shadow-lg team-img"
               />
               <div className="team-details text-center p-3">
@@ -134,8 +155,8 @@ const About = () => {
           <div className="col-md-4">
             <div className="team-card position-relative">
               <img
-                src="https://img.freepik.com/free-photo/expressive-girl-is-posing-studio_176474-59350.jpg?t=st=1737373399~exp=1737376999~hmac=c82e930d040aa415845d0a3a714ee49c5373e6fd9e6eaf6f774acd31afbc4cf2&w=1060"
-                alt="Team Member"
+                src={about4}
+                alt="Emily Johnson"
                 className="img-fluid shadow-lg team-img"
               />
               <div className="team-details text-center p-3">
@@ -164,7 +185,6 @@ const About = () => {
             data-bs-ride="carousel"
           >
             <div className="carousel-inner text-center shadow-lg p-4 rounded bg-light">
-              {/* Testimonial 1 */}
               <div className="carousel-item active">
                 <blockquote className="blockquote">
                   <p className="mb-4 fs-4 fst-italic">
@@ -176,7 +196,6 @@ const About = () => {
                   </footer>
                 </blockquote>
               </div>
-              {/* Testimonial 2 */}
               <div className="carousel-item">
                 <blockquote className="blockquote">
                   <p className="mb-4 fs-4 fst-italic">
@@ -187,7 +206,6 @@ const About = () => {
                   </footer>
                 </blockquote>
               </div>
-              {/* Testimonial 3 */}
               <div className="carousel-item">
                 <blockquote className="blockquote">
                   <p className="mb-4 fs-4 fst-italic">
@@ -201,128 +219,45 @@ const About = () => {
               </div>
             </div>
 
-            {/* Carousel Indicators */}
             <div className="carousel-indicators">
               <button
                 type="button"
                 data-bs-target="#testimonialsCarousel"
                 data-bs-slide-to="0"
                 className="active"
+                style={{ backgroundColor: "#000" }}
                 aria-current="true"
-                aria-label="Testimonial 1"
-                style={{ filter: "invert(1)" }}
+                aria-label="Slide 1"
               ></button>
               <button
                 type="button"
                 data-bs-target="#testimonialsCarousel"
                 data-bs-slide-to="1"
-                aria-label="Testimonial 2"
-                style={{ filter: "invert(1)" }}
+                style={{ backgroundColor: "#000" }}
+                aria-label="Slide 2"
               ></button>
               <button
                 type="button"
                 data-bs-target="#testimonialsCarousel"
                 data-bs-slide-to="2"
-                aria-label="Testimonial 3"
-                style={{ filter: "invert(1)" }}
+                style={{ backgroundColor: "#000" }}
+                aria-label="Slide 3"
               ></button>
             </div>
-
-            {/* Carousel Controls */}
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#testimonialsCarousel"
-              data-bs-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true "style={{ filter: "invert(1)" }}
-              ></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#testimonialsCarousel"
-              data-bs-slide="next"
-            >
-             <span
-  className="carousel-control-next-icon"
-  aria-hidden="true"
-  style={{ filter: "invert(1)" }}
-></span>
-
-              <span className="visually-hidden">Next</span>
-            </button>
           </div>
         </div>
       </div>
 
-      {/* Achievements Section */}
-      <div className="container py-5">
-        <h2 className="text-center fw-bold mb-5">Our Achievements</h2>
-        <div className="row text-center g-4">
-          <div className="col-md-4">
-            <i className="bi bi-people-fill text-primary display-1"></i>
-            <h5 className="mt-3 fw-bold">500+ Children Adopted</h5>
-            <p className="text-muted fs-6">
-              We’ve successfully placed over 500 children into loving homes.
-            </p>
-          </div>
-          <div className="col-md-4">
-            <i className="bi bi-house-fill text-success display-1"></i>
-            <h5 className="mt-3 fw-bold">400+ Families Supported</h5>
-            <p className="text-muted fs-6">
-              Hundreds of families have found joy and fulfillment through our
-              services.
-            </p>
-          </div>
-          <div className="col-md-4">
-            <i className="bi bi-trophy-fill text-warning display-1"></i>
-            <h5 className="mt-3 fw-bold">20+ Years of Excellence</h5>
-            <p className="text-muted fs-6">
-              Over two decades of experience in providing quality adoption
-              services.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Call to Donate/Volunteer */}
-      <div
-        className="text-center py-5"
-        style={{
-          background: "linear-gradient(to right, #ffecd2, #06bbcc )",
-          color: "#333",
-        }}
-      >
-        <h2 className="fw-bold">Support Our Mission</h2>
-        <p className="lead fs-5 mb-4">
-          Help us continue creating families by donating or volunteering with
-          us.
+      {/* Call to Action Section */}
+      <div className="container text-center py-5">
+        <h2 className="fw-bold mb-4">Support Our Mission</h2>
+        <p className="fs-5 mb-4">
+          Your donation and volunteer efforts help create forever families for
+          children in need.
         </p>
-        <div>
-          <button
-            className="btn btn-primary me-3 px-4 py-2 shadow"
-            style={{
-              backgroundColor: "#007bff",
-              border: "none",
-              fontSize: "1rem",
-            }}
-          >
-            <i className="bi bi-heart-fill me-2"></i>Donate Now
-          </button>
-          <button
-            className="btn btn-outline-primary px-4 py-2 shadow"
-            style={{
-              borderColor: "#007bff",
-              fontSize: "1rem",
-            }}
-          >
-            <i className="bi bi-people-fill me-2"></i>Become a Volunteer
-          </button>
-        </div>
+        <a href="/donate" className="btn btn-success btn-lg px-4 py-2">
+          Donate Now
+        </a>
       </div>
     </div>
   );

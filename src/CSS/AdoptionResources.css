@@ -1,0 +1,62 @@
+/* AdoptionResources.css */
+.adoption-resources-page {
+    background-color: #f7f9fc;
+    padding: 50px 0;
+  }
+  
+  h2.text-primary {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    color: #2a5298;
+    margin-bottom: 40px;
+  }
+  
+  .resources-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .resource-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .resource-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resource-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #2a5298;
+    margin-bottom: 15px;
+  }
+  
+  .resource-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .btn-primary {
+    background-color: #2a5298;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #1e3c72;
+  }
+  
+  @media (max-width: 768px) {
+    .resources-section {
+      grid-template-columns: 1fr;
+    }
+  }
+  
