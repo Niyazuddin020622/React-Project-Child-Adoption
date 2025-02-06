@@ -1,0 +1,23 @@
+/* Child Image Styling */
+.child-details-img {
+    width: 100%;
+    height: 350px; /* Fixed height for uniform display */
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    filter: blur(10px); /* Adjust the blur intensity */
+  }
+  
+  /* Center Buttons */
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  /* Error Image */
+  .not-found-img {
+    width: 200px;
+    margin-top: 10px;
+  }
+  

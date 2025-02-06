@@ -1,5 +1,5 @@
-import React from "react";
-import "../CSS/nav.css";
+
+import "../CSS/nav.css"; // Ensure you have this file in your project
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -10,9 +10,10 @@ const Navbar = () => {
         background: "linear-gradient(45deg, #1e3c72, #2a5298, #1e3c72)",
         backgroundSize: "300% 300%",
         animation: "gradientBG 8s ease infinite",
+        
       }}
     >
-      <div className="container">
+      <div className="container-fluid" style={{gap:"15%"}}>
         <Link className="navbar-brand" to="/">
           <img
             src="https://static.vecteezy.com/system/resources/previews/021/955/473/original/happy-family-symbol-icon-logo-design-vector.jpg"
@@ -32,7 +33,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+          <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link text-white" to="/">
                 Home
@@ -45,22 +46,31 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/contact">
-                Contact_Us
+                Contact Us
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/available-children">
+              <Link
+                className="nav-link text-white"
+                to="/available-children"
+              >
                 Available_Children
               </Link>
             </li>
+
             <li className="nav-item">
               <Link className="nav-link text-white" to="/adoption-resources">
-                Adoption_Resources
+                Adoption Resources
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/donate">
+              <Link className="nav-link text-white" to="/donates">
                 Donate
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/gallery">
+                Gallery
               </Link>
             </li>
             <li className="nav-item dropdown">
@@ -103,24 +113,19 @@ const Navbar = () => {
               </ul>
             </li>
           </ul>
-          <form className="d-flex align-items-center">
-            <input
-              className="form-control me-2 search-bar"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-light" type="submit">
-              Search
-            </button>
+
+          <form
+            className="d-flex align-items-center ms-auto"
+            style={{ marginRight: "50px" }}
+          >
+            
           </form>
-          <button className="btn btn-light ms-3" type="button">
+
+          <button className="btn btn-light " type="button">
             Login
           </button>
         </div>
       </div>
-
-      {/* Keyframes for Gradient Animation */}
       <style>{`
         @keyframes gradientBG {
           0% { background-position: 0% 50%; }

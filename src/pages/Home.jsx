@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HeroSection from "./HeroSection";
+// import HeroSection from "./HeroSection";
 import "../CSS/Home.css"; // Add a CSS file for additional styling
 
 const Home = () => {
@@ -36,7 +36,7 @@ const Home = () => {
 
   return (
     <div className="home-background">
-      <HeroSection />
+      {/* <HeroSection /> */}
       <div className="children-section container py-5">
         <h2 className="text-center fw-bold mb-4">Available Children for Adoption</h2>
         <div className="row g-4">

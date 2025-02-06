@@ -1,72 +1,66 @@
-/* Custom Navbar Styles */
-
-.navbar {
-  position: fixed; /* Make the navbar fixed at the top */
-  top: 0;
-  width: 100%;
-  z-index: 1030; 
-  background: rgba(255, 255, 255, 0.9); /* Light translucent background */
-  backdrop-filter: blur(10px); /* Add a blur effect for a frosted-glass look */
-  transition: background 0.3s, box-shadow 0.3s; /* Smooth transition for effects */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+.navbar-nav {
+  align-items: center; /* Align all nav items vertically */
 }
 
-.navbar.scrolled {
-  background: rgba(255, 255, 255, 1); /* Solid background when scrolled */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a stronger shadow */
+.nav-item .nav-link,
+.nav-item .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 1rem;
+  padding: 10px 15px;
 }
 
-.navbar-logo {
-  height: 50px;
-  width: auto;
-  border-radius: 50%;
+.dropdown-menu {
+  background-color: #1e3c72;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.text-orange {
-  color: #ff8800 !important;
-  font-weight: 500;
+.dropdown-item {
+  color: white;
 }
 
-.navbar-nav .nav-item {
-  margin-right: 15px; 
+.dropdown-item:hover {
+  background-color: #ffc107;
+  color: #1e3c72;
 }
 
 .search-bar {
   border-radius: 20px;
+  max-width: 200px;
 }
 
-.btn-orange {
-  background-color: #ff8800;
-  color: white;
-  border: none;
+.navbar-brand img {
+  height: 50px;
+  width: auto;
+  margin-top: 0;
+  border-radius: 50%;
 }
 
-.btn-orange:hover {
-  background-color: #e67700;
-}
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start; /* Left align the items */
+    padding-left: 10px;
+    width: 100%; /* Full width */
+  }
 
-.btn-outline-orange {
-  color: #ff8800;
-  border: 1px solid #ff8800;
-  border-radius: 20px;
-}
+  .navbar-brand img {
+    height: 30px;
+  }
 
-.btn-outline-orange:hover {
-  background-color: #ff8800;
-  color: white;
-}
+  .search-bar {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 
-.navbar-nav {
-  display: flex;
-  flex-wrap: nowrap; 
-  align-items: center; 
-}
-
-.navbar-nav .dropdown-menu {
-  border-radius: 10px;
-}
-
-body {
-  padding-top: 70px; 
-}
+  .btn {
+    width: 100%;
+  }
   
+  .navbar-collapse {
+    width: 100%; /* Ensure the navbar takes up full width */
+  }
+}
