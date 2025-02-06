@@ -1,0 +1,45 @@
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Button Hover Animation */
+.btn-hover {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.btn-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Input Focus Effect */
+.input-focus:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Image Hover Effect */
+.img-hover {
+  transition: transform 0.3s ease;
+}
+.img-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .max-w-4xl {
+    flex-direction: column;
+    align-items: center;
+  }
+}

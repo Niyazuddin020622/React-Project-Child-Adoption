@@ -5,14 +5,16 @@ import Home from "./components/Home";
 import About from "./components/About";
 
 import Navbar from "./components/Navbar";
-
+import React from "react";
 import Footer from "./components/Footer";
 
 import Contact from "./components/Contact";
 import Adoption from "./components/AdoptionResources";
 import Donates from "./components/Donates";
 import Gallery from './components/Gallery';
+import Login from './login-register/Login';
 
+import Register from './login-register/Register';
 
 const App = () => {
   return (
@@ -31,10 +33,13 @@ const App = () => {
 
       <Route path="/contact" element={<Contact />} />
       <Route path="/gallery" element={<Gallery />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/adoption-resources" element={<Adoption />} />
-
+      <Route path="/login" element={<Login />} />
       
-    </Routes>
+      <Route path="/register" element={<Register />} />
+      
+    </Routes> 
     <Footer />
   </Router>
   );

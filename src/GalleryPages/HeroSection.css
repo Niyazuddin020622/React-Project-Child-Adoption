@@ -1,0 +1,52 @@
+/* HeroSection.css */
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1s ease-in-out; /* Smooth fade-in effect */
+  }
+  
+  .hero-section.animate {
+    opacity: 1; /* Show the section with animation */
+  }
+  
+  .hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    object-fit: cover; /* Ensures the video covers the full screen without stretching */
+    z-index: -1; /* Keeps the video in the background */
+  }
+  
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 1; /* Keeps text above the video */
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    animation: fadeIn 2s ease-in-out; /* Animation for text */
+  }
+  
+  /* Animation for fade-in effect */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

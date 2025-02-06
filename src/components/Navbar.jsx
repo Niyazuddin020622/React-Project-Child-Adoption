@@ -1,4 +1,3 @@
-
 import "../CSS/nav.css"; // Ensure you have this file in your project
 import { Link } from "react-router-dom";
 
@@ -10,9 +9,10 @@ const Navbar = () => {
         background: "linear-gradient(45deg, #1e3c72, #2a5298, #1e3c72)",
         backgroundSize: "300% 300%",
         animation: "gradientBG 8s ease infinite",
+        
       }}
     >
-      <div className="container-fluid">
+      <div className="container-fluid" style={{gap:"15%"}}>
         <Link className="navbar-brand" to="/">
           <img
             src="https://static.vecteezy.com/system/resources/previews/021/955/473/original/happy-family-symbol-icon-logo-design-vector.jpg"
@@ -48,6 +48,15 @@ const Navbar = () => {
                 Contact Us
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link text-white"
+                to="/available-children"
+              >
+                Available_Children
+              </Link>
+            </li>
+
             <li className="nav-item">
               <Link className="nav-link text-white" to="/adoption-resources">
                 Adoption Resources
@@ -108,22 +117,13 @@ const Navbar = () => {
             className="d-flex align-items-center ms-auto"
             style={{ marginRight: "50px" }}
           >
-            <input
-              className="form-control me-2 ms-5 ms-md-0 search-bar"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-light ms-5 ms-md-0 mb-3 mb-sm-0"
-              type="submit"
-            >
-              Search
-            </button>
+            
           </form>
 
-          <button className="btn btn-light " type="button">
-            Login
+          <button className="btn btn-dark " type="button">
+          <Link className="dropdown-item" to="/login">
+                   Login
+                  </Link>
           </button>
         </div>
       </div>
