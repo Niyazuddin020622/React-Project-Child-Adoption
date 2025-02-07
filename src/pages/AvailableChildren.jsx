@@ -1,8 +1,8 @@
 import React from "react";
 import "../CSS/availableChildren.css";
-// import HeroSectionChildren from "./HeroSectionChildren";
+import HeroSectionChildren from "./HeroSectionChildren";
 import { Link, useNavigate } from "react-router-dom";
-import Carousel from "react-bootstrap/Carousel"; // Importing Bootstrap Carousel
+// import Carousel from "react-bootstrap/Carousel"; // Importing Bootstrap Carousel
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap styles
 
 const AvailableChildren = () => {
@@ -35,31 +35,31 @@ const AvailableChildren = () => {
       description: "Aaryan is energetic and loves dancing and playing sports.",
       background: "Aaryan is very social and always ready to try new activities.",
     },
-    {
-      id: 4,
-      name: "Rani Soni",
-      age: 5,
-      photo: "https://cdn.pixabay.com/photo/2015/06/12/21/58/child-807547_640.jpg",
-      description: "Aaryan is energetic and loves dancing and playing sports.",
-      background: "Aaryan is very social and always ready to try new activities.",
-    },
-    {
-      id: 5,
-      name: "Hamza Babu",
-      age: 5,
-      photo: "https://cdn.pixabay.com/photo/2016/05/31/11/26/baby-1426651_1280.jpg",
-      description: "Aaryan is energetic and loves dancing and playing sports.",
-      background: "Aaryan is very social and always ready to try new activities.",
-    },
+    // {
+    //   id: 4,
+    //   name: "Rani Soni",
+    //   age: 5,
+    //   photo: "https://cdn.pixabay.com/photo/2015/06/12/21/58/child-807547_640.jpg",
+    //   description: "Aaryan is energetic and loves dancing and playing sports.",
+    //   background: "Aaryan is very social and always ready to try new activities.",
+    // },
+    // {
+    //   id: 5,
+    //   name: "Hamza Babu",
+    //   age: 5,
+    //   photo: "https://cdn.pixabay.com/photo/2016/05/31/11/26/baby-1426651_1280.jpg",
+    //   description: "Aaryan is energetic and loves dancing and playing sports.",
+    //   background: "Aaryan is very social and always ready to try new activities.",
+    // },
    
   ];
 
   return (
    
-    <div className="container available-children-container">
-      
+    <div className="main">
+    <HeroSectionChildren/>
       {/* Dynamic Carousel of Children */}
-      <Carousel fade interval={3000}>
+      {/* <Carousel fade interval={3000}>
         {children.map((child) => (
           <Carousel.Item key={child.id}>
             <div className="carousel-image-container">
@@ -72,12 +72,12 @@ const AvailableChildren = () => {
             </Carousel.Caption>
           </Carousel.Item>
         ))}
-      </Carousel>
+      </Carousel> */}
 
       <h1 className="text-center my-4" style={{ color: "#1e3c72", fontWeight: "bold" }}>
         Available Children for Adoption
       </h1>
-      {/* <HeroSectionChildren/> */}
+ 
       <p className="text-center description">
         These children are looking for a loving family. Click on a profile to learn more about them.
       </p>
@@ -116,33 +116,6 @@ const AvailableChildren = () => {
           </div>
         ))}
       </div>
-
-      {/* FAQ Section */}
-<div className="faq-section mt-5">
-  <h2 className="text-center">Frequently Asked Questions</h2>
-  <div className="faq">
-    <div className="faq-item">
-      <h4>Q: What is the adoption process like?</h4>
-      <p>
-        A: The adoption process involves several steps. First, you will need to complete an adoption application. After submission, you will go through background checks, interviews, and home visits. Following that, you will be matched with a child based on your preferences and the child’s needs. It can take some time, but the goal is to ensure that both the child and the adoptive parents are a good match. The final step is the legal process, which includes court approval to finalize the adoption.
-      </p>
-    </div>
-
-    <div className="faq-item">
-      <h4>Q: Is there any financial assistance available?</h4>
-      <p>
-        A: Yes, there are various financial assistance programs available to support adoptive parents. These may include adoption subsidies, grants, and tax credits. Some states and organizations also offer financial aid to help cover the costs associated with the adoption process, such as home study fees, legal fees, and medical expenses for children with special needs. It's important to research the resources available in your area and understand the specific eligibility requirements.
-      </p>
-    </div>
-
-    <div className="faq-item">
-      <h4>Q: Can single parents adopt?</h4>
-      <p>
-        A: Absolutely! Many single parents successfully adopt children. Adoption agencies and organizations do not discriminate based on marital status, and they welcome single individuals who are prepared and committed to providing a loving and stable home. Single parents often bring unique strengths to the adoption process, such as a strong sense of commitment, flexibility, and the ability to provide one-on-one attention to their child. If you're interested in adopting as a single parent, the adoption agency will work with you to assess your readiness and provide support throughout the process.
-      </p>
-    </div>
-  </div>
-</div>
 </div>
   );
 };

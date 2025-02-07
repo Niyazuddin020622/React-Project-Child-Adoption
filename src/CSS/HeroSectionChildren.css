@@ -1,14 +1,10 @@
-.hero-section {
-  background: linear-gradient(
-                  to bottom, 
-                  rgba(255, 123, 123, 0.7), /* Warm coral */
-                  rgba(149, 105, 105, 0.5), /* Light peach */
-                  rgba(210, 255, 210, 0.7)  /* Soft mint */
-              ), 
-              url('https://img.freepik.com/free-photo/family-forest_1303-4699.jpg?t=st=1737367770~exp=1737371370~hmac=3f32ae0db787d83974e5796289ae5049ab7fe0c734d8d0b175a713a22e04120e&w=1060') 
+.hero-section1 {
+  background:
+              url('https://img.freepik.com/free-photo/dad-daughter-having-breakfast-kitchen_144627-39775.jpg?t=st=1738913762~exp=1738917362~hmac=2d7954d7a11780d23e62bbac5db6801250c59d78714851fa8fad61e76560b6ff&w=1060')
               no-repeat center center/cover;
   color: #fefefe; /* Off-white for readability */
   height: 75vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +31,7 @@
   
   .hero-overlay {
     text-align: center;
-    background: rgba(66, 63, 63, 0.6); /* Semi-transparent overlay */
+    background: rgba(135, 133, 133, 0.6); /* Semi-transparent overlay */
     padding: 2.5rem;
     border-radius: 15px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);

@@ -1,7 +1,6 @@
 /* Container for the Available Children Section */
-.available-children-container {
-  margin-top: 20px;
-
+.main {
+  
 }
 
 /* Carousel Styling */
@@ -56,26 +55,14 @@
   transform: scale(1.05);
   transition: transform 0.3s ease-in-out;
 }
-
-/* FAQ Section Styling */
-.faq-section {
-
-  padding: 30px;
-}
-
-.faq h4 {
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-.faq p {
-  font-size: 16px;
-  color: #495057;
+.children-grid{
+  margin: 10px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .children-grid {
     grid-template-columns: 1fr;
+
   }
 }
