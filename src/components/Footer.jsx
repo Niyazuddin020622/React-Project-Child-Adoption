@@ -35,8 +35,6 @@ const Footer = () => {
               <li>+91 6203357350</li>
             </ul>
           </div>
-          
-          
           {/* Opening Hours */}
           <div className="col-lg-3 col-md-6 mb-4">
             <h5 className="text-uppercase mb-4">Opening Hours</h5>
