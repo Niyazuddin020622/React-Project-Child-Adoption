@@ -1,6 +1,7 @@
 import React from 'react'
 import "../CSS/Home_Hero.css";
-import HeroSection from '../HomePages/HeroSection';
+import ImageCarousel from '../HomePages/Carousel';
+// import HeroSection from '../HomePages/HeroSection';
 import AdditionalInfo from '../HomePages/AdditionalInfo';
 // import Banner from '../HomePages/Banner';
 import WhyAdopt from '../HomePages/WhyAdopt';
@@ -11,7 +12,8 @@ import UpcomingEvents from '../HomePages/UpcomingEvents';
 function Home() {
   return (
     <div className ="Home-pages">
-      <HeroSection/>
+      {/* <HeroSection/> */}
+      <ImageCarousel/>
       <AdditionalInfo/>
       <WhyAdopt/>
       {/* <Banner/> */}

@@ -15,6 +15,7 @@ import Gallery from './components/Gallery';
 import Login from './login-register/Login';
 
 import Register from './login-register/Register';
+import AdoptionStoryPage from './ParentsPages/AdoptionStoryPage';
 
 const App = () => {
   return (
@@ -38,7 +39,8 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       
       <Route path="/register" element={<Register />} />
-      
+     
+      <Route path="/adoption-stories" element={<AdoptionStoryPage />} />   
     </Routes> 
     <Footer />
   </Router>
