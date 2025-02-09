@@ -2,7 +2,7 @@ import React from 'react'
 import "../CSS/HeroSectionChildren.css"
 function HeroSectionChildren() {
   return (
-    
+
     <div>
        {/* Hero Section */}
        <div className="hero-section1">
@@ -17,6 +17,7 @@ function HeroSectionChildren() {
               <option value="" disabled selected>
                 Select Gender
               </option>
+              
               <option value="girl">Girl</option>
               <option value="boy">Boy</option>
             </select>
