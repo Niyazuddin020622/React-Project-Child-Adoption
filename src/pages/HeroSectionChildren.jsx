@@ -2,6 +2,7 @@ import React from 'react'
 import "../CSS/HeroSectionChildren.css"
 function HeroSectionChildren() {
   return (
+    
     <div>
        {/* Hero Section */}
        <div className="hero-section1">
