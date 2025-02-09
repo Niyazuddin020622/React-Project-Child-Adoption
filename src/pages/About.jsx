@@ -6,6 +6,8 @@ import about1 from  "../assets/about1.jpg";
 import about2 from  "../assets/about2.jpg";
 import about4 from  "../assets/about4.jpg";
 
+
+
 const About = () => {
   return (
     <div>
