@@ -1,4 +1,3 @@
-
 import "../CSS/nav.css"; // Ensure you have this file in your project
 import { Link } from "react-router-dom";
 
@@ -35,14 +34,10 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/">
-                Home
-              </Link>
+              <Link className="nav-link text-white" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/about">
-                About
-              </Link>
+              <Link className="nav-link text-white" to="/about">About</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/contact">
@@ -85,30 +80,29 @@ const Navbar = () => {
                 Parents
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <Link className="dropdown-item" to="/guide-to-adoption">
-                    Guide to Adoption
-                  </Link>
+                {/* Nested Dropdown for Resident Indian Parents */}
+                <li className="dropdown-submenu">
+                  <a
+                    className="dropdown-item dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Resident Indian Parents
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link className="dropdown-item" to="/register">Already Registered Parents</Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/login">New Register Parents</Link>
+                    </li>
+                  </ul>
                 </li>
+             
                 <li>
-                  <Link className="dropdown-item" to="/parenting-tips">
-                    Parenting Tips
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/support-groups">
-                    Support Groups
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/legal-resources">
-                    Legal Resources
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/adoption-stories">
-                    Adoption Stories
-                  </Link>
+                  <Link className="dropdown-item" to="/adoption-stories">Adoption Stories</Link>
                 </li>
               </ul>
             </li>
@@ -131,6 +125,18 @@ const Navbar = () => {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
+        }
+        .dropdown-submenu {
+          position: relative;
+        }
+        .dropdown-submenu .dropdown-menu {
+          top: 0;
+          left: 100%;
+          margin-top: 0;
+          display: none;
+        }
+        .dropdown-submenu:hover .dropdown-menu {
+          display: block;
         }
       `}</style>
     </nav>
