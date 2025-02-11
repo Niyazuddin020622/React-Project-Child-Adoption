@@ -1,5 +1,5 @@
 import React from 'react'
-import "../CSS/Home_Hero.css";
+// import "../CSS/Home_Hero.css";
 import ImageCarousel from '../HomePages/Carousel';
 // import HeroSection from '../HomePages/HeroSection';
 import AdditionalInfo from '../HomePages/AdditionalInfo';
