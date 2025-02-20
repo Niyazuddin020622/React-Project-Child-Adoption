@@ -12,6 +12,8 @@ import ChildDetails from "./components/ChildDetails";
 import Gallery from "./GalleryPages/Gallery";
 import AdoptNow from  "./components/AdoptNow";
 import Home from  "./components/Home";
+import Login from "./login-register/Login";
+import Register from "./login-register/Register";
 
 
 
@@ -29,7 +31,8 @@ const App = () => {
         <Route path="/child-details/:id" element={<ChildDetails />} />
         <Route path="/adopt-now" element={<AdoptNow />} />
         <Route path="/gallery" element={<Gallery />} />
-        
+        <Route path="/login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Routes>
       <Footer />
     </Router>

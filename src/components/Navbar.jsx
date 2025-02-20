@@ -93,10 +93,10 @@ const Navbar = () => {
                   </a>
                   <ul className="dropdown-menu">
                     <li>
-                      <Link className="dropdown-item" to="/register">Already Registered Parents</Link>
+                      <Link className="dropdown-item" to="../register">Already Registered Parents</Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/login">New Register Parents</Link>
+                      <Link className="dropdown-item" to="../login">New Register Parents</Link>
                     </li>
                   </ul>
                 </li>

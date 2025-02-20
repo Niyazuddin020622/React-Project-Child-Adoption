@@ -33,6 +33,7 @@ const ChildAdoptionLogin = () => {
         
         {/* Left Side Content */}
         <div className="col-md-6 text-center text-md-start mb-4 mb-md-0">
+          
           <h2 className="fw-bold text-dark mb-3 animate__animated animate__fadeInLeft">Child Adoption</h2>
           <p className="text-muted mb-3 animate__animated animate__fadeInLeft animate__delay-1s">
             Adopting a child brings joy and a new beginning for both the child and the parents.

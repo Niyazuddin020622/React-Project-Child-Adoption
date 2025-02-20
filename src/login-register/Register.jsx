@@ -59,6 +59,7 @@ const ChildAdoptionRegister = () => {
     <div className="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
       <div className="card p-4 shadow-lg w-100" style={{ maxWidth: '800px' }}>
         <h2 className="text-center text-primary mb-4">Child Adoption Registration</h2>
+        
         <form onSubmit={handleSubmit}>
           <div className="row g-3">
             <div className="col-md-6">
