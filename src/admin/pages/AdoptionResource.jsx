@@ -81,6 +81,7 @@ function AdoptionResource() {
                   >
                     Edit
                   </Link>
+                  
                   <button
                     className="btn btn-danger btn-sm"
                     onClick={() => handleDelete(resource._id)}
