@@ -1,0 +1,12 @@
+.main-content {
+    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+    width: 70%;
+    margin-left: 290px;
+    padding: 20px;
+  }
+  
+  .content-shrink {
+    width: calc(100% - 250px); /* Sidebar ka width adjust karega */
+    margin-left: 250px;
+  }
+  

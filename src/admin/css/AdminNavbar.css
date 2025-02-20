@@ -1,0 +1,18 @@
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .navbar-custom {
+    background: linear-gradient(45deg, #1e3c72, #2a5298, #1e3c72);
+    background-size: 300% 300%;
+    animation: gradientBG 8s ease infinite;
+  }
+  
+  .navbar-logo {
+    width: auto;
+    height: 50px;
+    border-radius: 50%;
+  }
+  

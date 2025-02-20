@@ -1,7 +1,18 @@
+import React, { useState, useEffect } from "react";
 import "../CSS/nav.css"; // Ensure you have this file in your project
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [dateTime, setDateTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDateTime(new Date());
+    }, 1000); // Har 1 second me update hoga
+
+    return () => clearInterval(interval); // Memory leak avoid karne ke liye cleanup
+  }, []);
+
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light"
@@ -9,10 +20,9 @@ const Navbar = () => {
         background: "linear-gradient(45deg, #1e3c72, #2a5298, #1e3c72)",
         backgroundSize: "300% 300%",
         animation: "gradientBG 8s ease infinite",
-        
       }}
     >
-      <div className="container-fluid" style={{gap:"15%"}}>
+      <div className="container-fluid" style={{ gap: "15%" }}>
         <Link className="navbar-brand" to="/">
           <img
             src="https://static.vecteezy.com/system/resources/previews/021/955/473/original/happy-family-symbol-icon-logo-design-vector.jpg"
@@ -34,10 +44,14 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/">Home</Link>
+              <Link className="nav-link text-white" to="/">
+                Home
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/about">About</Link>
+              <Link className="nav-link text-white" to="/about">
+                About
+              </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/contact">
@@ -45,10 +59,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                className="nav-link text-white"
-                to="/available-children"
-              >
+              <Link className="nav-link text-white" to="/available-children">
                 Available_Children
               </Link>
             </li>
@@ -68,6 +79,12 @@ const Navbar = () => {
                 Gallery
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white d-none" to="/admin">
+                Admin
+              </Link>
+            </li>
+
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle text-white"
@@ -93,31 +110,42 @@ const Navbar = () => {
                   </a>
                   <ul className="dropdown-menu">
                     <li>
-                      <Link className="dropdown-item" to="/register">Already Registered Parents</Link>
+                      <Link className="dropdown-item" to="/login">
+                        Already Registered Parents
+                      </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/login">New Register Parents</Link>
+                      <Link className="dropdown-item" to="/register">
+                        New Register Parents
+                      </Link>
                     </li>
                   </ul>
                 </li>
-             
+
                 <li>
-                  <Link className="dropdown-item" to="/adoption-stories">Adoption Stories</Link>
+                  <Link className="dropdown-item" to="/adoption-stories">
+                    Adoption Stories
+                  </Link>
                 </li>
               </ul>
             </li>
           </ul>
 
+          {/* 🕒 Date & Time Section */}
+          <div className="text-white fw-bold">
+            {dateTime.toLocaleDateString()} | {dateTime.toLocaleTimeString()}
+          </div>
+
           <form
             className="d-flex align-items-center ms-auto"
             style={{ marginRight: "50px" }}
-          >
-            
-          </form>
+          ></form>
 
-          <button className="btn btn-light " type="button">
-            Login
-          </button>
+          <Link to="/login">
+            <button className="btn btn-light " type="button">
+              Login
+            </button>
+          </Link>
         </div>
       </div>
       <style>{`

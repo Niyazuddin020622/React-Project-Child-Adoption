@@ -1,0 +1,32 @@
+.view-reports-container {
+    margin-top: 80px;
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .custom-table {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .custom-table thead th {
+    text-align: center;
+  }
+  
+  .custom-table tbody td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+  .export-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
