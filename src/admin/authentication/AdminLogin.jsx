@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
   const [admin, setAdmin] = useState({
+    
     email: "",
     password: "",
   });
