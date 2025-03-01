@@ -12,6 +12,7 @@ const AdoptionStoryPage = () => {
         document.getElementById("learnMoreSection").scrollIntoView({ behavior: "smooth" });
       }, 100);
       
+      
     }
   };
 
