@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+// import '../CSS/DonatePage.css'
 const Donates = () => {
   const [amount, setAmount] = useState("");
 

@@ -1,23 +1,77 @@
-/* Child Image Styling */
+/* Child Profile Container */
+.child-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f9f9f9;
+  padding: 30px;
+}
+
+/* Profile Card */
+.child-profile-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  max-width: 900px;
+  width: 100%;
+  gap: 20px;
+}
+
+/* Child Image */
 .child-details-img {
-    width: 100%;
-    height: 350px; /* Fixed height for uniform display */
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    filter: blur(10px); /* Adjust the blur intensity */
-  }
-  
-  /* Center Buttons */
-  .btn-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-  }
-  
-  /* Error Image */
-  .not-found-img {
-    width: 200px;
-    margin-top: 10px;
-  }
-  
+  width: 100%;
+  max-width: 300px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Child Details */
+.child-details-info {
+  flex: 1;
+}
+
+.child-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.child-age {
+  font-size: 18px;
+  color: #555;
+}
+
+.child-description {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* Buttons */
+.btn-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-primary,
+.btn-success {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.btn-success {
+  background: #28a745;
+  border: none;
+}
+
+.btn-secondary {
+  background: #6c757d;
+}

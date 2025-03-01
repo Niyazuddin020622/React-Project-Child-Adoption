@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { } from "react";
 import "../CSS/nav.css"; // Ensure you have this file in your project
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [dateTime, setDateTime] = useState(new Date());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDateTime(new Date());
-    }, 1000); // Har 1 second me update hoga
-
-    return () => clearInterval(interval); // Memory leak avoid karne ke liye cleanup
-  }, []);
-
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light"
@@ -130,12 +120,6 @@ const Navbar = () => {
               </ul>
             </li>
           </ul>
-
-          {/* 🕒 Date & Time Section */}
-          <div className="text-white fw-bold">
-            {dateTime.toLocaleDateString()} | {dateTime.toLocaleTimeString()}
-          </div>
-
           <form
             className="d-flex align-items-center ms-auto"
             style={{ marginRight: "50px" }}

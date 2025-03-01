@@ -1,102 +1,52 @@
-import React from "react";
-import { Table, Button, Card, Container, Row, Col } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import AdoptionResource from "./AdoptionResource";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { FaUsers, FaHourglassHalf, FaChild, FaCheckCircle } from "react-icons/fa";
+import StatsCard from "./StatsCard";
+import AgeChart from "./AgeChart";
+import { fetchChildren, fetchUsers } from "../api/apiService";
 
 const AdminDashboard = () => {
-  // Dummy data (Replace with API data)
-  const totalUsers = 150;
-  const pendingRequests = 10;
-  const successfulAdoptions = 75;
+  const [children, setChildren] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [pendingCount, setPendingCount] = useState(0);
+  const [successfulCount, setSuccessfulCount] = useState(0);
 
-  const adoptionRequests = [
-    { id: 101, user: "John Doe", child: "Alice (5 years)", status: "Pending" },
-    { id: 102, user: "Jane Smith", child: "Bob (6 years)", status: "Approved" },
-    { id: 103, user: "Michael Lee", child: "Emma (4 years)", status: "Pending" },
-  ];
+  useEffect(() => {
+    fetchChildren().then(setChildren);
+    fetchUsers().then((data) => {
+      setUsers(data);
+      setPendingCount(data.filter((user) => user.status === "pending").length);
+      setSuccessfulCount(data.filter((user) => user.status === "successful").length);
+    });
+  }, []);
+
+  // Group Ages into Ranges
+  const ageGroups = { "0-5": 0, "6-10": 0, "11-15": 0 };
+  children.forEach((child) => {
+    if (child.age >= 0 && child.age <= 5) ageGroups["0-5"]++;
+    else if (child.age >= 6 && child.age <= 10) ageGroups["6-10"]++;
+    else if (child.age >= 11 && child.age <= 15) ageGroups["11-15"]++;
+  });
+
+  const ageData = Object.keys(ageGroups).map((key) => ({ ageRange: key, count: ageGroups[key] }));
 
   return (
     <Container className="mt-4">
-      <h2 className="text-center">Admin Dashboard</h2>
+      <h2 className="text-center mb-4">Admin Dashboard</h2>
 
-      {/* Statistics Section */}
+
+      {/* Statistics Cards */}
       <Row className="mt-4">
-        <Col md={4} className="mb-3">
-          <Card className="bg-primary text-white">
-            <Card.Body aria-label="Total Users">
-              <h5>Total Users</h5>
-              <h3>{totalUsers}</h3>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col md={4} className="mb-3">
-          <Card className="bg-warning text-dark">
-            <Card.Body aria-label="Pending Requests">
-              <h5>Pending Requests</h5>
-              <h3>{pendingRequests}</h3>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col md={4} className="mb-3">
-          <Card className="bg-success text-white">
-            <Card.Body aria-label="Successful Adoptions">
-              <h5>Successful Adoptions</h5>
-              <h3>{successfulAdoptions}</h3>
-            </Card.Body>
-          </Card>
-        </Col>
+        <Col md={3}><StatsCard icon={FaUsers} title="Total Users" value={users.length} bgColor="primary" /></Col>
+        <Col md={3}><StatsCard icon={FaChild} title="Total Children" value={children.length} bgColor="info" /></Col>
+        <Col md={3}><StatsCard icon={FaHourglassHalf} title="Pending Requests" value={pendingCount} bgColor="warning" /></Col>
+        <Col md={3}><StatsCard icon={FaCheckCircle} title="Successful Registrations" value={successfulCount} bgColor="success" /></Col>
       </Row>
 
-      {/* Adoption Requests Table */}
-      <div className="mt-4">
-        <h4>Manage Adoption Requests</h4>
-        <div className="table-responsive">
-          <Table striped bordered hover>
-            <thead className="table-dark">
-              <tr>
-                <th>Request ID</th>
-                <th>User</th>
-                <th>Child</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {adoptionRequests.map((request) => (
-                <tr key={request.id}>
-                  <td>{request.id}</td>
-                  <td>{request.user}</td>
-                  <td>{request.child}</td>
-                  <td>
-                    <span
-                      className={`badge ${
-                        request.status === "Pending" ? "bg-warning" : "bg-success"
-                      }`}
-                    >
-                      {request.status}
-                    </span>
-                  </td>
-                  <td>
-                    {request.status === "Pending" && (
-                      <>
-                        <Button variant="success" size="sm" className="me-2">
-                          Approve
-                        </Button>
-                        <Button variant="danger" size="sm">Reject</Button>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
-      </div>
-
-      {/* Additional Component */}
-      <AdoptionResource />
+      {/* Age Chart */}
+      <Row className="mt-4">
+        <Col md={12}><AgeChart ageData={ageData} /></Col>
+      </Row>
     </Container>
   );
 };

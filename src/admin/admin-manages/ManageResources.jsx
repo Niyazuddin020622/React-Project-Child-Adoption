@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import AdoptionResource from '../pages/AdoptionResource';
 
 const ManageResources = () => {
   const [resource, setResource] = useState({
@@ -94,6 +95,7 @@ const ManageResources = () => {
         </form>
       </div>
       <br />
+      <AdoptionResource/>
     </div>
   );
 };

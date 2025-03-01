@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,9 +8,18 @@ function AdminNavbar() {
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const adminToken = localStorage.getItem("adminToken");
+    if (!adminToken) {
+      navigate("/admin-login"); // Unauthorized access restriction
+    }
+  }, [navigate]);
+
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
-      navigate("/logout");
+      localStorage.removeItem("adminToken"); // Remove session token
+      sessionStorage.clear(); // Clear session storage
+      navigate("/admin-login"); // Redirect to login page
       setExpanded(false);
     }
   };
@@ -19,9 +28,9 @@ function AdminNavbar() {
     <Navbar 
       expand="lg" 
       variant="dark" 
-      className="navbar-custom"
+      className="navbar-custom sticky-top"
       expanded={expanded}
-      onToggle={setExpanded} 
+      onToggle={setExpanded}
     >
       <Container>
         <Navbar.Brand as={Link} to="/admin-dashboard">

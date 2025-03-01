@@ -18,8 +18,6 @@ import Login from "./login-register/Login"; //ye bhi niyazuddin add kiya hai
 import Register from "./login-register/Register"; //Niyazuddin ye add kiya hai
 import Parents from "./ParentsPages/AdoptionStoryPage";//ye niyazuddin add kiya hai
 
-
-
 const App = () => {
   return (
     <Router>
@@ -60,15 +58,15 @@ const App = () => {
           }
         />
         <Route
-          path="/child-details/:id"
+          path="/child/:id"
           element={
             <UserLayout>
               <ChildDetails />
             </UserLayout>
           }
         />
-        <Route
-          path="/adopt-now"
+        <Route 
+          path="/adopt-now/:id"
           element={
             <UserLayout>
               <AdoptNow />

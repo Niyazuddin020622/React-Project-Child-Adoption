@@ -7,7 +7,7 @@ const ChildAdoptionLogin = () => {
   const [otp, setOtp] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
-    mobileNumber: '',
+    password: '',
   });
 
   const handleLoginClick = () => {
@@ -65,12 +65,12 @@ const ChildAdoptionLogin = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="mobile-number" className="form-label">Mobile Number</label>
+                <label htmlFor="password" className="form-label">Password</label>
                 <input
-                  type="text"
-                  id="mobile-number"
-                  name="mobileNumber"
-                  value={formData.mobileNumber}
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
                   onChange={handleChange}
                   className="form-control input-focus"
                   required

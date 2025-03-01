@@ -1,10 +1,98 @@
-.adopt-form {
-    max-width: 500px;
-    margin: auto;
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-  }
-  
+/* Adoption Form Styles */
+.adopt-now-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+}
+
+.adopt-now-container h2 {
+  color: #222;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.adopt-now-container .child-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 4px solid #28a745;
+}
+
+.adopt-now-container .adoption-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.adopt-now-container input,
+.adopt-now-container textarea,
+.adopt-now-container select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.adopt-now-container input:focus,
+.adopt-now-container textarea:focus,
+.adopt-now-container select:focus {
+  border-color: #28a745;
+  outline: none;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
+.adopt-now-container textarea {
+  resize: none;
+  height: 90px;
+}
+
+.adopt-now-container label {
+  font-weight: bold;
+  text-align: left;
+  display: block;
+  margin-top: 12px;
+  color: #555;
+}
+
+.adopt-now-container input[type="file"] {
+  padding: 5px;
+  border: none;
+}
+
+.adopt-now-container button {
+  background: linear-gradient(135deg, #28a745, #218838);
+  color: white;
+  padding: 14px;
+  font-size: 17px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.adopt-now-container button:hover {
+  background: linear-gradient(135deg, #218838, #1e7e34);
+}
+
+.adopt-now-container .success-message {
+  color: #28a745;
+  font-weight: bold;
+  margin-top: 15px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
