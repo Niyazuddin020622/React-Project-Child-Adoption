@@ -11,6 +11,7 @@ const AdoptionStoryPage = () => {
       setTimeout(() => {
         document.getElementById("learnMoreSection").scrollIntoView({ behavior: "smooth" });
       }, 100);
+      
     }
   };
 

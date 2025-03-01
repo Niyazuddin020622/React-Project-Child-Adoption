@@ -1,12 +1,11 @@
 import React from "react";
+import Spinner from '../components/Spinner'; 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../CSS/About.css";
 import about1 from  "../assets/about1.jpg";
 import about2 from  "../assets/about2.jpg";
 import about4 from  "../assets/about4.jpg";
-
-
 
 const About = () => {
   return (
