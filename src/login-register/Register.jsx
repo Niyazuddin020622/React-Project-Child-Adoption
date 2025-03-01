@@ -29,11 +29,7 @@ const ChildAdoptionRegister = () => {
 
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
-<<<<<<< HEAD
       <div className="card p-4 shadow-lg w-100" style={{ maxWidth: "800px" }}>
-=======
-      <div className="card p-4 shadow-lg w-100" style={{ maxWidth: '800px' }}>
->>>>>>> 8ad17acdecc29c623cef4d20d7408bdc73443505
         <h2 className="text-center text-primary mb-4">Child Adoption Registration</h2>
         <form onSubmit={handleSubmit}>
           <div className="row g-3">
