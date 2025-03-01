@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from '../components/Spinner'; 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../CSS/About.css";
