@@ -17,6 +17,8 @@ import Donates from "./components/Donates";
 import Login from "./login-register/Login"; //ye bhi niyazuddin add kiya hai
 import Register from "./login-register/Register"; //Niyazuddin ye add kiya hai
 import Parents from "./ParentsPages/AdoptionStoryPage";//ye niyazuddin add kiya hai
+import LiveChat from "./chat/LiveChat";
+
 
 const App = () => {
   return (
@@ -115,6 +117,9 @@ const App = () => {
             </UserLayout>
           }
         />
+        <Route path="/live-chat" element={<UserLayout>
+              <LiveChat />
+            </UserLayout>} />
       </Routes>
       {/* <Footer /> */}
     </Router>

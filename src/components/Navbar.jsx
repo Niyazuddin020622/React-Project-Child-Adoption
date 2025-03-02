@@ -1,11 +1,11 @@
-import React, { } from "react";
-import "../CSS/nav.css"; // Ensure you have this file in your project
-import { Link } from "react-router-dom";
-
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import "../CSS/nav.css";
 const Navbar = () => {
+  const location = useLocation(); // Get current route
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-light"
+      className="navbar navbar-expand-lg navbar-light sticky-top"
       style={{
         background: "linear-gradient(45deg, #1e3c72, #2a5298, #1e3c72)",
         backgroundSize: "300% 300%",
@@ -31,50 +31,31 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link text-white" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white" to="/about">
-                About
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white" to="/contact">
-                Contact Us
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white" to="/available-children">
-                Available_Children
-              </Link>
-            </li>
+          <ul className="navbar-nav me-auto">
+            {[
+              { path: "/", label: "Home" },
+              { path: "/about", label: "About" },
+              { path: "/contact", label: "Contact Us" },
+              { path: "/available-children", label: "Available Children" },
+              { path: "/adoption-resources", label: "Adoption Resources" },
+              { path: "/donates", label: "Donate" },
+              { path: "/gallery", label: "Gallery" },
+            ].map((item) => (
+              <li className="nav-item" key={item.path}>
+                <Link
+                  className={`nav-link text-white ${
+                    location.pathname === item.path ? "active" : ""
+                  }`}
+                  to={item.path}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
 
-            <li className="nav-item">
-              <Link className="nav-link text-white" to="/adoption-resources">
-                Adoption Resources
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white" to="/donates">
-                Donate
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white" to="/gallery">
-                Gallery
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white d-none" to="/admin">
-                Admin
-              </Link>
-            </li>
-
+            {/* Parents Dropdown */}
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle text-white"
@@ -87,11 +68,11 @@ const Navbar = () => {
                 Parents
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                {/* Nested Dropdown for Resident Indian Parents */}
-                <li className="dropdown-submenu">
+                <li className="nav-item dropdown">
                   <a
                     className="dropdown-item dropdown-toggle"
                     href="#"
+                    id="indianParentsDropdown"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -100,14 +81,17 @@ const Navbar = () => {
                   </a>
                   <ul className="dropdown-menu">
                     <li>
-                      <Link className="dropdown-item" to="/register">Already Registered Parents</Link>
+                      <Link className="dropdown-item" to="/register">
+                        Already Registered Parents
+                      </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/login">New Register Parents</Link>
+                      <Link className="dropdown-item" to="/login">
+                        New Register Parents
+                      </Link>
                     </li>
                   </ul>
                 </li>
-
                 <li>
                   <Link className="dropdown-item" to="/adoption-stories">
                     Adoption Stories
@@ -116,39 +100,52 @@ const Navbar = () => {
               </ul>
             </li>
           </ul>
-          <form
-            className="d-flex align-items-center ms-auto"
-            style={{ marginRight: "50px" }}
-          ></form>
 
-          <Link to="/login">
-            <button className="btn btn-light " type="button">
-              Login
-            </button>
+          {/* Login Button */}
+          <Link to="/login" className="ms-auto">
+            <button className="btn btn-light">Login</button>
           </Link>
         </div>
       </div>
+
+      {/* CSS Fixes */}
       <style>{`
+      .nav-link.active {
+          font-weight: bold;
+          border-bottom: 2px solid white;
+        }
         @keyframes gradientBG {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        .dropdown-submenu {
-          position: relative;
+
+        /* Fix Bootstrap 5 Nested Dropdown */
+        .dropdown-menu .dropdown-toggle::after {
+          border-top: 0.3em solid transparent;
+          border-right: 0;
+          border-bottom: 0.3em solid transparent;
+          border-left: 0.3em solid;
         }
-        .dropdown-submenu .dropdown-menu {
-          top: 0;
-          left: 100%;
-          margin-top: 0;
+        
+        .dropdown-menu .dropdown-item.dropdown-toggle {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .dropdown-menu .dropdown-menu {
           display: none;
+          position: absolute;
+          left: 100%;
+          top: 0;
         }
-        .dropdown-submenu:hover .dropdown-menu {
+
+        .dropdown-menu > .dropdown:hover > .dropdown-menu {
           display: block;
         }
       `}</style>
     </nav>
   );
 };
-
 export default Navbar;

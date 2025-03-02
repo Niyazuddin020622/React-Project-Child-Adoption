@@ -16,9 +16,5 @@ export const fetchChildren = async () => {
       console.error("Error fetching users:", error);
       return [];
     }
-<<<<<<< HEAD
   };
   
-=======
-  };
->>>>>>> 8ad17acdecc29c623cef4d20d7408bdc73443505
