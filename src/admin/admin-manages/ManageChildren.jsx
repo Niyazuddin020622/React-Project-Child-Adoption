@@ -66,7 +66,7 @@ const ManageChildren = () => {
   return (
     <div className="container mt-4">
       <h2 className="text-center">Manage Children</h2>
-      <form onSubmit={handleSubmit} className="p-4 shadow rounded bg-light">
+      <form onSubmit={handleSubmit} className="p-4 shadow rounded bg-light"  style={{ max: "1000px" }}>
         <div className="mb-3">
           <label className="form-label">Name</label>
           <input type="text" className="form-control" name="name" value={child.name} onChange={handleChange} required />
