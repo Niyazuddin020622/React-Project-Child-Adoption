@@ -1,52 +1,57 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { FaUsers, FaHourglassHalf, FaChild, FaCheckCircle } from "react-icons/fa";
-import StatsCard from "./StatsCard";
-import AgeChart from "./AgeChart";
-import { fetchChildren, fetchUsers } from "../api/apiService";
+import { Container } from "react-bootstrap";
+import StatsSection from "./StatsSection";
+import PendingAdoptionRequestsTable from "./PendingAdoptionRequestsTable";
+import ApprovedAdoptionRequestsTable from "./ApprovedAdoptionRequestsTable";
+import AdminAdoptionManagement from "./AdminAdoptionManagement";
 
 const AdminDashboard = () => {
-  const [children, setChildren] = useState([]);
   const [users, setUsers] = useState([]);
-  const [pendingCount, setPendingCount] = useState(0);
-  const [successfulCount, setSuccessfulCount] = useState(0);
+  const [children, setChildren] = useState([]);
+  const [pendingRequests, setPendingRequests] = useState([]);
+  const [successfulRequests, setSuccessfulRequests] = useState([]);
 
   useEffect(() => {
-    fetchChildren().then(setChildren);
-    fetchUsers().then((data) => {
-      setUsers(data);
-      setPendingCount(data.filter((user) => user.status === "pending").length);
-      setSuccessfulCount(data.filter((user) => user.status === "successful").length);
-    });
+    // Fetch users
+    fetch("http://localhost:3000/api/users")
+      .then((res) => res.json())
+      .then(setUsers)
+      .catch((error) => console.error("Error fetching users:", error));
+
+    // Fetch children
+    fetch("http://localhost:3000/api/children")
+      .then((res) => res.json())
+      .then(setChildren)
+      .catch((error) => console.error("Error fetching children:", error));
+
+    // Fetch adoption requests
+    fetch("http://localhost:3000/api/adoption")
+      .then((res) => res.json())
+      .then((data) => {
+        setPendingRequests(data.filter((adoption) => adoption.status === "Pending"));
+        setSuccessfulRequests(data.filter((adoption) => adoption.status === "Approved"));
+      })
+      .catch((error) => console.error("Error fetching adoption requests:", error));
   }, []);
-
-  // Group Ages into Ranges
-  const ageGroups = { "0-5": 0, "6-10": 0, "11-15": 0 };
-  children.forEach((child) => {
-    if (child.age >= 0 && child.age <= 5) ageGroups["0-5"]++;
-    else if (child.age >= 6 && child.age <= 10) ageGroups["6-10"]++;
-    else if (child.age >= 11 && child.age <= 15) ageGroups["11-15"]++;
-  });
-
-  const ageData = Object.keys(ageGroups).map((key) => ({ ageRange: key, count: ageGroups[key] }));
 
   return (
     <Container className="mt-4">
       <h2 className="text-center mb-4">Admin Dashboard</h2>
 
+      {/* Statistics Section */}
+      <StatsSection 
+        usersCount={users.length} 
+        childrenCount={children.length} 
+        pendingCount={pendingRequests.length} 
+        successCount={successfulRequests.length} 
+      />
 
-      {/* Statistics Cards */}
-      <Row className="mt-4">
-        <Col md={3}><StatsCard icon={FaUsers} title="Total Users" value={users.length} bgColor="primary" /></Col>
-        <Col md={3}><StatsCard icon={FaChild} title="Total Children" value={children.length} bgColor="info" /></Col>
-        <Col md={3}><StatsCard icon={FaHourglassHalf} title="Pending Requests" value={pendingCount} bgColor="warning" /></Col>
-        <Col md={3}><StatsCard icon={FaCheckCircle} title="Successful Registrations" value={successfulCount} bgColor="success" /></Col>
-      </Row>
+      {/* Pending & Approved Requests */}
+      <PendingAdoptionRequestsTable pendingRequests={pendingRequests} />
+      <ApprovedAdoptionRequestsTable successfulRequests={successfulRequests} />
 
-      {/* Age Chart */}
-      <Row className="mt-4">
-        <Col md={12}><AgeChart ageData={ageData} /></Col>
-      </Row>
+      {/* Adoption Management Component */}
+      <AdminAdoptionManagement />
     </Container>
   );
 };

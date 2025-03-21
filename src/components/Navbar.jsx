@@ -1,8 +1,28 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../CSS/nav.css";
+import { FaUserCircle } from "react-icons/fa"; // User icon
+
 const Navbar = () => {
-  const location = useLocation(); // Get current route
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  // Check if user is logged in
+  useEffect(() => {
+    const checkUser = () => {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      setUser(storedUser);
+    };
+    checkUser();
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user"); // Remove user from local storage
+    setUser(null); // Reset state
+    navigate("/login"); // Redirect to login page
+  };
+
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light sticky-top"
@@ -12,7 +32,11 @@ const Navbar = () => {
         animation: "gradientBG 8s ease infinite",
       }}
     >
-      <div className="container-fluid" style={{ gap: "15%" }}>
+      <div
+        className="container-fluid justify-content-between"
+        style={{ gap: "15%" }}
+      >
+        {/* Logo */}
         <Link className="navbar-brand" to="/">
           <img
             src="https://static.vecteezy.com/system/resources/previews/021/955/473/original/happy-family-symbol-icon-logo-design-vector.jpg"
@@ -20,6 +44,8 @@ const Navbar = () => {
             className="navbar-logo"
           />
         </Link>
+
+        {/* Navbar Toggler */}
         <button
           className="navbar-toggler"
           type="button"
@@ -34,6 +60,7 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">
+            {/* Navbar Links */}
             {[
               { path: "/", label: "Home" },
               { path: "/about", label: "About" },
@@ -46,7 +73,7 @@ const Navbar = () => {
               <li className="nav-item" key={item.path}>
                 <Link
                   className={`nav-link text-white ${
-                    location.pathname === item.path ? "active" : ""
+                    location.pathname === item.path ? "active fw-bold" : ""
                   }`}
                   to={item.path}
                 >
@@ -101,51 +128,56 @@ const Navbar = () => {
             </li>
           </ul>
 
-          {/* Login Button */}
-          <Link to="/login" className="ms-auto">
-            <button className="btn btn-light">Login</button>
-          </Link>
+          {/* User Icon or Login Button */}
+          <div className="d-flex align-items-center ms-auto">
+            {user ? (
+              <div className="dropdown">
+                <button
+                  className="btn btn-light dropdown-toggle d-flex align-items-center"
+                  type="button"
+                  id="userDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <FaUserCircle size={20} className="me-1" />
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                  <li>
+                    <Link className="dropdown-item" to="/profile">
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      className="dropdown-item text-danger"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/login" className="ms-3">
+                <button className="btn btn-light d-flex align-items-center">
+                  <FaUserCircle size={20} className="me-1" /> Login
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* CSS Fixes */}
+      {/* CSS Animation */}
       <style>{`
-      .nav-link.active {
-          font-weight: bold;
-          border-bottom: 2px solid white;
-        }
         @keyframes gradientBG {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-
-        /* Fix Bootstrap 5 Nested Dropdown */
-        .dropdown-menu .dropdown-toggle::after {
-          border-top: 0.3em solid transparent;
-          border-right: 0;
-          border-bottom: 0.3em solid transparent;
-          border-left: 0.3em solid;
-        }
-        
-        .dropdown-menu .dropdown-item.dropdown-toggle {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .dropdown-menu .dropdown-menu {
-          display: none;
-          position: absolute;
-          left: 100%;
-          top: 0;
-        }
-
-        .dropdown-menu > .dropdown:hover > .dropdown-menu {
-          display: block;
-        }
       `}</style>
     </nav>
   );
 };
+
 export default Navbar;

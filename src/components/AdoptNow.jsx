@@ -1,78 +1,93 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import "../CSS/AdoptionNow.css";
 
-const AdoptNow = () => {
+const AdoptNow = ({ user }) => {
   const { id } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const [child, setChild] = useState(location.state?.child || null);
+
+  // Ensure user data is fetched from localStorage if not passed via props
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const loggedInUser = user || storedUser;
+
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
+    fullName: loggedInUser?.fullName || "",
+    email: loggedInUser?.email || "",
     phone: "",
     address: "",
     occupation: "",
-    income: "",
-    maritalStatus: "",
     adoptionReason: "",
-    idProof: null,
-    incomeProof: null,
-    medicalReport: null,
     agreeTerms: false,
+    userId: loggedInUser?._id || null, // Ensure userId is stored
+    childId: id || null, // Store childId
   });
 
   useEffect(() => {
+    console.log("Logged-in user:", loggedInUser);
+
     if (!child) {
+      console.log("Fetching child details...");
       fetch(`http://localhost:3000/api/children/${id}`)
         .then((res) => res.json())
-        .then((data) => setChild(data))
+        .then((data) => {
+          console.log("Fetched child data:", data);
+          setChild(data);
+          setFormData((prev) => ({ ...prev, childId: data._id })); // Update formData with childId
+        })
         .catch((err) => console.error("Error fetching child details:", err));
     }
-  }, [id, child]);
+  }, [id]);
 
   const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
-    if (type === "file") {
-      setFormData((prev) => ({ ...prev, [name]: files[0] }));
-    } else if (type === "checkbox") {
-      setFormData((prev) => ({ ...prev, [name]: checked }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!formData.agreeTerms) {
       alert("You must agree to the terms before submitting.");
       return;
     }
-
-    const formDataObj = new FormData();
-    Object.keys(formData).forEach((key) => {
-      formDataObj.append(key, formData[key]);
-    });
-
+  
+    // Ensure userId and childId are included
+    const formSubmission = {
+      ...formData,
+      user: loggedInUser?._id,  // Add user ID
+      child: child?._id,  // Add child ID
+    };
+  
     try {
       const response = await fetch("http://localhost:3000/api/adoptionform", {
         method: "POST",
-        body: formDataObj,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formSubmission),
       });
-
-      const result = await response.json();
+  
       if (response.ok) {
         setFormSubmitted(true);
-        alert("🎉 Adoption application submitted successfully! Please proceed to payment.");
+        alert("🎉 Adoption application submitted successfully!");
+        setTimeout(() => navigate("/available-children"), 3000);
       } else {
-        alert(`Failed to submit application: ${result.error}`);
+        const errorData = await response.json();
+        alert(errorData.error || "Failed to submit application.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("An error occurred while submitting the form.");
     }
   };
+  
+  if (!loggedInUser) {
+    return <h2>Please login to adopt a child.</h2>;
+  }
 
   if (!child) {
     return <h2>Loading child details...</h2>;
@@ -86,36 +101,22 @@ const AdoptNow = () => {
 
       {!formSubmitted ? (
         <form onSubmit={handleSubmit} className="adoption-form">
-          <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required />
-          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+          <input type="text" name="fullName" value={formData.fullName} disabled />
+          <input type="email" name="email" value={formData.email} disabled />
           <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} required />
           <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} required />
           <input type="text" name="occupation" placeholder="Occupation" value={formData.occupation} onChange={handleChange} required />
-          <input type="number" name="income" placeholder="Annual Income" value={formData.income} onChange={handleChange} required />
-          <select name="maritalStatus" value={formData.maritalStatus} onChange={handleChange} required>
-            <option value="">Select Marital Status</option>
-            <option value="Single">Single</option>
-            <option value="Married">Married</option>
-          </select>
           <textarea name="adoptionReason" placeholder="Why do you want to adopt?" value={formData.adoptionReason} onChange={handleChange} required />
 
-          <input type="file" name="idProof" onChange={handleChange} required />
-          <input type="file" name="incomeProof" onChange={handleChange} required />
-          <input type="file" name="medicalReport" onChange={handleChange} required />
+          <label>
+            <input type="checkbox"name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} style={{width:"20px"}}/>
+            I agree to the adoption policies.
+          </label>
 
-           
-          <label style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}>
-              <input style={{ width: "auto" }} type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} />
-              I agree to the adoption policies.
-            </label>
           <button type="submit">Submit Application</button>
         </form>
       ) : (
-        <div className="payment-section">
-          <h3>Your application has been submitted ✅</h3>
-          <p>Proceed with the payment to complete the adoption process.</p>
-          <button onClick={() => alert("Redirecting to payment gateway...")}>Pay Now</button>
-        </div>
+        <h3>✅ Adoption application submitted successfully!</h3>
       )}
     </div>
   );

@@ -48,9 +48,9 @@ function AdoptionResource() {
         <table className="table table-bordered table-hover">
           <thead className="table-dark">
             <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th style={{ width: "30%" }}>Description</th>
+              {/* <th>ID</th> */}
+              <th style={{ width: "15%" }}>Title</th>
+              <th style={{ width: "40%" }}>Description</th>
               <th>Button Name</th>
               <th>Button Link</th>
               <th>Actions</th>
@@ -59,7 +59,7 @@ function AdoptionResource() {
           <tbody>
             {resources.map((resource) => (
               <tr key={resource._id}>
-                <td>{resource._id}</td>
+                {/* <td>{resource._id}</td> */}
                 <td>{resource.title}</td>
                 <td>{resource.description}</td>
                 <td>{resource.buttonText}</td>
@@ -95,6 +95,7 @@ function AdoptionResource() {
         </table>
       </div>
     </div>
+    
   );
 }
 

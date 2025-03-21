@@ -91,10 +91,11 @@ const ChildDetails = () => {
               🔙 Back to Available Children
             </Link>
             <Link
-              to={`/adopt-now/${child._id}`} // Correct route
+              to={`/adopt-now/${child._id}`} state={{ child }}// Correct route
               className="btn btn-success"
             >
               ✅ Proceed to Adopt
+            
             </Link>
           </div>
         </div>

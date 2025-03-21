@@ -1,3 +1,11 @@
+/* Navbar Styles */
+.navbar {
+  padding: 0.5rem 1rem; /* Reduced padding for height adjustment */
+  background: linear-gradient(45deg, #1e3c72, #2a5298, #1e3c72);
+  background-size: 300% 300%;
+  animation: gradientBG 8s ease infinite;
+}
+
 .navbar-nav {
   align-items: center; /* Align all nav items vertically */
 }
@@ -7,38 +15,42 @@
   display: flex;
   align-items: center;
   height: 100%;
-  font-size: 1rem;
-  padding: 10px 15px;
+  font-size: 0.9rem; /* Slightly smaller font size */
+  padding: 5px 10px; /* Reduced padding for nav links */
+  color: white; /* Default text color */
+}
+
+.navbar-brand img {
+  height: 40px; /* Reduced logo height */
+  width: auto;
+  margin-top: 0;
+  border-radius: 50%;
 }
 
 .dropdown-menu {
-  background-color: #1e3c72;
+  background-color: #2a5298; /* Darker background for dropdown */
   color: white;
   border: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-item {
-  color: white;
+  color: white; /* Default dropdown item color */
 }
 
 .dropdown-item:hover {
-  background-color: #ffc107;
-  color: #1e3c72;
+  background-color: #ffc107; /* Highlight on hover */
+  color: #1e3c72; /* Change text color on hover */
 }
 
-.search-bar {
-  border-radius: 20px;
-  max-width: 200px;
+/* Animation for gradient background */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.navbar-brand img {
-  height: 50px;
-  width: auto;
-  margin-top: 0;
-  border-radius: 50%;
-}
-
+/* Media Queries for Responsive Design */
 @media (max-width: 768px) {
   .navbar-nav {
     flex-direction: column;
@@ -48,19 +60,6 @@
   }
 
   .navbar-brand img {
-    height: 30px;
-  }
-
-  .search-bar {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .btn {
-    width: 100%;
-  }
-  
-  .navbar-collapse {
-    width: 100%; /* Ensure the navbar takes up full width */
+    height: 30px; /* Smaller logo for mobile */
   }
 }
