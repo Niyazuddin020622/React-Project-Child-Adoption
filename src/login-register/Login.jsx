@@ -8,7 +8,7 @@ import "./Animate.css";
 const ChildAdoptionLogin = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [modalData, setModalData] = useState({ show: false, message: "", isSuccess: false });
-  const [forgotPasswordStep, setForgotPasswordStep] = useState(0); // Default to 0 to hide the modal
+  const [forgotPasswordStep, setForgotPasswordStep] = useState(0);
   const [forgotPasswordData, setForgotPasswordData] = useState({ email: "", otp: "", newPassword: "", confirmPassword: "" });
 
   const navigate = useNavigate();
@@ -33,39 +33,6 @@ const ChildAdoptionLogin = () => {
       }
     } catch (error) {
       setModalData({ show: true, message: error.response?.data?.message || "Login failed!", isSuccess: false });
-    }
-  };
-
-  const handleForgotPassword = async () => {
-    if (forgotPasswordStep === 1) {
-      // Step 1: Send OTP
-      try {
-        await axios.post("http://localhost:3000/api/send-otp", { email: forgotPasswordData.email });
-        setForgotPasswordStep(2);
-      } catch (error) {
-        alert("Failed to send OTP");
-      }
-    } else if (forgotPasswordStep === 2) {
-      // Step 2: Verify OTP
-      try {
-        await axios.post("http://localhost:3000/api/verify-otp", { email: forgotPasswordData.email, otp: forgotPasswordData.otp });
-        setForgotPasswordStep(3);
-      } catch (error) {
-        alert("Invalid OTP");
-      }
-    } else if (forgotPasswordStep === 3) {
-      // Step 3: Reset Password
-      if (forgotPasswordData.newPassword !== forgotPasswordData.confirmPassword) {
-        alert("Passwords do not match");
-        return;
-      }
-      try {
-        await axios.post("http://localhost:3000/api/reset-password", forgotPasswordData);
-        alert("Password reset successful");
-        setForgotPasswordStep(0); // Close the modal after reset
-      } catch (error) {
-        alert("Failed to reset password");
-      }
     }
   };
 
@@ -104,14 +71,10 @@ const ChildAdoptionLogin = () => {
         </Modal.Header>
         <Modal.Body>
           {forgotPasswordStep === 1 && (
-            <>
-              <input type="email" placeholder="Enter your email" className="form-control mb-3" value={forgotPasswordData.email} onChange={(e) => setForgotPasswordData({ ...forgotPasswordData, email: e.target.value })} />
-            </>
+            <input type="email" placeholder="Enter your email" className="form-control mb-3" value={forgotPasswordData.email} onChange={(e) => setForgotPasswordData({ ...forgotPasswordData, email: e.target.value })} />
           )}
           {forgotPasswordStep === 2 && (
-            <>
-              <input type="text" placeholder="Enter OTP" className="form-control mb-3" value={forgotPasswordData.otp} onChange={(e) => setForgotPasswordData({ ...forgotPasswordData, otp: e.target.value })} />
-            </>
+            <input type="text" placeholder="Enter OTP" className="form-control mb-3" value={forgotPasswordData.otp} onChange={(e) => setForgotPasswordData({ ...forgotPasswordData, otp: e.target.value })} />
           )}
           {forgotPasswordStep === 3 && (
             <>
@@ -121,7 +84,7 @@ const ChildAdoptionLogin = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleForgotPassword}>{forgotPasswordStep === 3 ? "Reset Password" : "Next"}</Button>
+          <Button onClick={() => setForgotPasswordStep(forgotPasswordStep + 1)}>{forgotPasswordStep === 3 ? "Reset Password" : "Next"}</Button>
           <Button variant="secondary" onClick={() => setForgotPasswordStep(0)}>Cancel</Button>
         </Modal.Footer>
       </Modal>
