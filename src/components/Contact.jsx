@@ -1,16 +1,17 @@
 import React from "react";
 import "../CSS/Contact.css";
+import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
+  const navigate = useNavigate();
   return (
     <div className="contact-page">
       {/* Header Section */}
       <header className="contact-header text-center py-5 position-relative">
         <div className="running-text">
           <span>
-            "Adopting one child won’t change the world, but for that child,
-            the world will change forever. ❤️" &nbsp; | &nbsp; "Every child
-            deserves a loving home. Adopt and make a difference. 🏡"
+            "Adopting one child won’t change the world, but for that child, the world will change forever. ❤️" 
+            &nbsp; | &nbsp; "Every child deserves a loving home. Adopt and make a difference. 🏡"
           </span>
         </div>
 
@@ -18,7 +19,7 @@ const Contact = () => {
           className="header-background"
           style={{
             backgroundImage:
-              'url("https://images.unsplash.com/photo-1615723411974-ed6cf1a6180a?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
+              'url("https://images.unsplash.com/photo-1615723411974-ed6cf1a6180a?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D")',
             backgroundSize: "cover",
             backgroundPosition: "center",
             minHeight: "300px",
@@ -98,6 +99,35 @@ const Contact = () => {
         </div>
       </div>
 
+      {/* Volunteer & Donation Section */}
+      <div className="container py-5">
+        <div className="row justify-content-center">
+          <div className="col-lg-8">
+            <div className="card shadow-lg p-5 border-0 text-center">
+              <h3 className="mb-4">Become a Volunteer or Donate</h3>
+              <p className="text-muted">
+                Your support can change lives! Whether you want to volunteer or contribute financially, every effort counts. 
+                Help us create a better future for children in need.
+              </p>
+              <div className="d-flex justify-content-center">
+                <a href="/volunteer" className="btn btn-success mx-2">
+                  Volunteer Now
+                </a>
+                <a href="/donates" className="btn btn-warning mx-2">
+                  Donate Today
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       {/* Live Chat Support */}
+       <div className="live-chat-button text-center py-4">
+        <button className="btn btn-primary" onClick={() => navigate("/live-chat")}>
+          <i className="fas fa-comments"></i> Chat with Us
+        </button>
+      </div>
       {/* Contact Information */}
       <div className="container py-5">
         <div className="row justify-content-center">
@@ -117,10 +147,6 @@ const Contact = () => {
                   <i className="fas fa-map-marker-alt me-2 text-primary"></i>
                   <strong>Address:</strong> Rajkot, Gujarat, India 360020
                 </li>
-                <li className="mb-3">
-                  <i className="fas fa-clock me-2 text-primary"></i>
-                  <strong>Working Hours:</strong> Mon - Fri, 8 AM - 9 PM / Sat - Sun: 9am - 10pm
-                </li>
               </ul>
             </div>
           </div>
@@ -131,29 +157,11 @@ const Contact = () => {
       <div className="social-media-section text-center py-4 bg-light">
         <h3 className="mb-3">Follow Us</h3>
         <div>
-          <a
-            href="https://facebook.com/adoptionagency"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-outline-primary mx-2"
-          >
+          <a href="https://facebook.com/adoptionagency" className="btn btn-outline-primary mx-2">
             <i className="fab fa-facebook-f"></i> Facebook
           </a>
-          <a
-            href="https://instagram.com/adoptionagency"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-outline-danger mx-2"
-          >
+          <a href="https://instagram.com/adoptionagency" className="btn btn-outline-danger mx-2">
             <i className="fab fa-instagram"></i> Instagram
-          </a>
-          <a
-            href="https://twitter.com/adoptionagency"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-outline-info mx-2"
-          >
-            <i className="fab fa-twitter"></i> Twitter
           </a>
         </div>
       </div>
