@@ -16,9 +16,9 @@ import Home from "./components/Home";
 import Donates from "./components/Donates";
 import Login from "./login-register/Login"; //ye bhi niyazuddin add kiya hai
 import Register from "./login-register/Register"; //Niyazuddin ye add kiya hai
-import Parents from "./ParentsPages/AdoptionStoryPage";//ye niyazuddin add kiya hai
+import Parents from "./ParentsPages/AdoptionStoryPage"; //ye niyazuddin add kiya hai
 import LiveChat from "./chat/LiveChat";
-
+import UserProfile from "./userProfile/UserProfile";
 
 const App = () => {
   return (
@@ -26,7 +26,8 @@ const App = () => {
       <ScrollToTop />
       {/* <Navbar /> */}
       <Routes>
-        <Route path="/"
+        <Route
+          path="/"
           element={
             <UserLayout>
               <Home />
@@ -34,7 +35,13 @@ const App = () => {
           }
         />
         <Route
-          path="/about" element={<UserLayout><About /></UserLayout>}/>
+          path="/about"
+          element={
+            <UserLayout>
+              <About />
+            </UserLayout>
+          }
+        />
         <Route
           path="/contact"
           element={
@@ -67,7 +74,7 @@ const App = () => {
             </UserLayout>
           }
         />
-        <Route 
+        <Route
           path="/adopt-now/:id"
           element={
             <UserLayout>
@@ -117,9 +124,22 @@ const App = () => {
             </UserLayout>
           }
         />
-        <Route path="/live-chat" element={<UserLayout>
+        <Route
+          path="/live-chat"
+          element={
+            <UserLayout>
               <LiveChat />
-            </UserLayout>} />
+            </UserLayout>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <UserLayout>
+              <UserProfile />
+            </UserLayout>
+          }
+        />
       </Routes>
       {/* <Footer /> */}
     </Router>
