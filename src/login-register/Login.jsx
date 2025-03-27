@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Animate.css";
 
 const ChildAdoptionLogin = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [modalData, setModalData] = useState({ show: false, message: "", isSuccess: false });
-  const [forgotPasswordStep, setForgotPasswordStep] = useState(0);
-  const [forgotPasswordData, setForgotPasswordData] = useState({ email: "", otp: "", newPassword: "", confirmPassword: "" });
-
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -19,11 +17,14 @@ const ChildAdoptionLogin = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       const response = await axios.post("http://localhost:3000/api/login", formData);
       if (response.data && response.data.user) {
         localStorage.setItem("user", JSON.stringify(response.data.user));
         setModalData({ show: true, message: "Login Successful!", isSuccess: true });
+        
         setTimeout(() => {
           navigate("/");
           window.location.reload();
@@ -33,6 +34,8 @@ const ChildAdoptionLogin = () => {
       }
     } catch (error) {
       setModalData({ show: true, message: error.response?.data?.message || "Login failed!", isSuccess: false });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,40 +56,27 @@ const ChildAdoptionLogin = () => {
           <form onSubmit={handleLogin}>
             <input type="email" name="email" value={formData.email} onChange={handleChange} className="form-control mb-3" placeholder="Email" required />
             <input type="password" name="password" value={formData.password} onChange={handleChange} className="form-control mb-3" placeholder="Password" required />
-            <button type="submit" className="btn btn-primary w-100">Login</button>
+            
+            <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+              {loading ? <Spinner animation="border" size="sm" /> : "Login"}
+            </button>
+
             <p className="mt-3 text-muted">
               Don't have an account? <Link to="/register">Register here</Link>
             </p>
             <p className="mt-2">
-              <button type="button" className="btn btn-link p-0" onClick={() => setForgotPasswordStep(1)}>Forgot Password?</button>
+              <button type="button" className="btn btn-link p-0">Forgot Password?</button>
             </p>
           </form>
         </div>
       </div>
 
-      {/* Forgot Password Modal */}
-      <Modal show={forgotPasswordStep > 0} onHide={() => setForgotPasswordStep(0)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Forgot Password</Modal.Title>
+      {/* Modal for Login Message without Close Button */}
+      <Modal show={modalData.show} centered>
+        <Modal.Header>
+          <Modal.Title>{modalData.isSuccess ? "✅ Success" : "❌ Error"}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {forgotPasswordStep === 1 && (
-            <input type="email" placeholder="Enter your email" className="form-control mb-3" value={forgotPasswordData.email} onChange={(e) => setForgotPasswordData({ ...forgotPasswordData, email: e.target.value })} />
-          )}
-          {forgotPasswordStep === 2 && (
-            <input type="text" placeholder="Enter OTP" className="form-control mb-3" value={forgotPasswordData.otp} onChange={(e) => setForgotPasswordData({ ...forgotPasswordData, otp: e.target.value })} />
-          )}
-          {forgotPasswordStep === 3 && (
-            <>
-              <input type="password" placeholder="New Password" className="form-control mb-3" value={forgotPasswordData.newPassword} onChange={(e) => setForgotPasswordData({ ...forgotPasswordData, newPassword: e.target.value })} />
-              <input type="password" placeholder="Confirm Password" className="form-control mb-3" value={forgotPasswordData.confirmPassword} onChange={(e) => setForgotPasswordData({ ...forgotPasswordData, confirmPassword: e.target.value })} />
-            </>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setForgotPasswordStep(forgotPasswordStep + 1)}>{forgotPasswordStep === 3 ? "Reset Password" : "Next"}</Button>
-          <Button variant="secondary" onClick={() => setForgotPasswordStep(0)}>Cancel</Button>
-        </Modal.Footer>
+        <Modal.Body>{modalData.message}</Modal.Body>
       </Modal>
     </div>
   );
