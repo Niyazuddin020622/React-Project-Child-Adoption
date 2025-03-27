@@ -1,16 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import "../CSS/Contact.css";
 import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [responseMessage, setResponseMessage] = useState("");
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/api/user/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setResponseMessage("Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" }); // Reset form
+      } else {
+        setResponseMessage(data.error || "Something went wrong");
+      }
+    } catch (error) {
+      setResponseMessage("Server error, please try again later");
+    }
+  };
+
   return (
     <div className="contact-page">
       {/* Header Section */}
       <header className="contact-header text-center py-5 position-relative">
         <div className="running-text">
           <span>
-            "Adopting one child won’t change the world, but for that child, the world will change forever. ❤️" 
+            "Adopting one child won’t change the world, but for that child, the world will change forever. ❤" 
             &nbsp; | &nbsp; "Every child deserves a loving home. Adopt and make a difference. 🏡"
           </span>
         </div>
@@ -31,12 +67,10 @@ const Contact = () => {
           <h1 className="display-4 fw-bold">Get in Touch</h1>
           <p className="text-light fs-5">We'd love to hear from you!</p>
         </div>
-      </header>
+      </header> 
 
-      {/* Main Contact Section */}
       <div className="container py-5">
         <div className="row">
-          {/* Map Section */}
           <div className="col-lg-6">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118147.68696443523!2d70.73872349317425!3d22.273624940214702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959c98ac71cdf0f%3A0x76dd15cfbe93ad3b!2sRajkot%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1737823552628!5m2!1sen!2sin"
@@ -49,11 +83,11 @@ const Contact = () => {
             ></iframe>
           </div>
 
-          {/* Contact Form */}
           <div className="col-lg-6">
             <div className="card shadow-lg p-4 border-0">
               <h3 className="mb-4">Send Us a Message</h3>
-              <form>
+              {responseMessage && <p className="alert alert-info">{responseMessage}</p>}
+              <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">
                     Full Name
@@ -61,8 +95,11 @@ const Contact = () => {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     className="form-control"
                     placeholder="Your name"
+                    value={formData.name}
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -73,8 +110,11 @@ const Contact = () => {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     className="form-control"
                     placeholder="Your email"
+                    value={formData.email}
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -84,9 +124,12 @@ const Contact = () => {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     className="form-control"
                     rows="4"
                     placeholder="Your message"
+                    value={formData.message}
+                    onChange={handleChange}
                     required
                   ></textarea>
                 </div>
@@ -99,61 +142,6 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Volunteer & Donation Section */}
-      <div className="container py-5">
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <div className="card shadow-lg p-5 border-0 text-center">
-              <h3 className="mb-4">Become a Volunteer or Donate</h3>
-              <p className="text-muted">
-                Your support can change lives! Whether you want to volunteer or contribute financially, every effort counts. 
-                Help us create a better future for children in need.
-              </p>
-              <div className="d-flex justify-content-center">
-                <a href="/volunteer" className="btn btn-success mx-2">
-                  Volunteer Now
-                </a>
-                <a href="/donates" className="btn btn-warning mx-2">
-                  Donate Today
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-       {/* Live Chat Support */}
-       <div className="live-chat-button text-center py-4">
-        <button className="btn btn-primary" onClick={() => navigate("/live-chat")}>
-          <i className="fas fa-comments"></i> Chat with Us
-        </button>
-      </div>
-      {/* Contact Information */}
-      <div className="container py-5">
-        <div className="row justify-content-center">
-          <div className="col-lg-6">
-            <div className="card shadow-lg p-5 border-0">
-              <h3 className="mb-4">Contact Information</h3>
-              <ul className="list-unstyled">
-                <li className="mb-3">
-                  <i className="fas fa-phone-alt me-2 text-primary"></i>
-                  <strong>Phone:</strong> +91 8825135461 / +91 6206173716
-                </li>
-                <li className="mb-3">
-                  <i className="fas fa-envelope me-2 text-primary"></i>
-                  <strong>Email:</strong> childadopt02@adoptionagency.com
-                </li>
-                <li className="mb-3">
-                  <i className="fas fa-map-marker-alt me-2 text-primary"></i>
-                  <strong>Address:</strong> Rajkot, Gujarat, India 360020
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Social Media Section */}
       <div className="social-media-section text-center py-4 bg-light">
         <h3 className="mb-3">Follow Us</h3>
         <div>
