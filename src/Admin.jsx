@@ -7,6 +7,8 @@ import ScrollToTop from "./components/ScrollToTop";
 //backend
 // import Admin from "../src/admin/AdoptionResource";
 import AdminDashboard from "./admin/pages/AdminDashboard";
+
+import ManageContact from "./admin/admin-manages/ManageContact"
 import ManageUsers from "./admin/admin-manages/ManageUsers";
 import ManageResources from "./admin/admin-manages/ManageResources";
 import EditResource from './admin/pages/EditResource';
@@ -16,6 +18,7 @@ import ManageChildren from "./admin/admin-manages/ManageChildren";
 import ManageDonations from "./admin/admin-manages/ManageDonations";
 import AdminRegister from "./admin/authentication/AdminRegister";
 import AdminLogin from "./admin/authentication/AdminLogin";
+
 
 
 const App = () => {
@@ -35,6 +38,14 @@ const App = () => {
           }
         />
         {/* add admin page tarmpory */}
+         <Route
+          path="/manage-contact"
+          element={
+            <AdminLayout>
+              <ManageContact/>
+            </AdminLayout>
+          }
+         /> 
         <Route
           path="/manage-users"
           element={
@@ -58,6 +69,7 @@ const App = () => {
          <Route path="/manage-donations" element={<AdminLayout><ManageDonations /></AdminLayout>} />
          <Route path="/admin-register" element={<AdminRegister />} />
          <Route path="/admin-login" element={<AdminLogin />} />
+         <Route path="/manage-contact" element={<AdminLayout><ManageContact/></AdminLayout>}  />
       </Routes>
       {/* <Footer /> */}
     </Router>

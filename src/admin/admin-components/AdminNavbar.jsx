@@ -47,6 +47,7 @@ function AdminNavbar() {
         <Navbar.Collapse id="navbarNav">
           <Nav className="mx-auto">
             <Nav.Link as={Link} to="/admin-dashboard" onClick={() => setExpanded(false)}>Dashboard</Nav.Link>
+            <Nav.Link as={Link} to="/manage-contact" onClick={() => setExpanded(false)}>Manage Contact</Nav.Link>
             <Nav.Link as={Link} to="/manage-users" onClick={() => setExpanded(false)}>Manage Users</Nav.Link>
             <Nav.Link as={Link} to="/manage-children" onClick={() => setExpanded(false)}>Manage Children</Nav.Link>
             <Nav.Link as={Link} to="/manage-donations" onClick={() => setExpanded(false)}>Manage Donations</Nav.Link>
