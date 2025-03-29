@@ -19,6 +19,7 @@ import Register from "./login-register/Register"; //Niyazuddin ye add kiya hai
 import Parents from "./ParentsPages/AdoptionStoryPage"; //ye niyazuddin add kiya hai
 import LiveChat from "./chat/LiveChat";
 import UserProfile from "./userProfile/UserProfile";
+import EventRegister from "./HomePages/event_register";
 
 const App = () => {
   return (
@@ -137,6 +138,14 @@ const App = () => {
           element={
             <UserLayout>
               <UserProfile />
+            </UserLayout>
+          }
+        />
+        <Route
+          path="/eventregister"
+          element={
+            <UserLayout>
+              <EventRegister />
             </UserLayout>
           }
         />
