@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./ProfileSection.css";
 
 const ProfileSection = ({ user, setUser }) => {
@@ -8,7 +9,8 @@ const ProfileSection = ({ user, setUser }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState(user);
   const [loading, setLoading] = useState(false);
-  
+  const navigate = useNavigate();  // 👈 Navigation hook
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -53,7 +55,7 @@ const ProfileSection = ({ user, setUser }) => {
   };
 
   return (
-    <div className="profile-section " style={{marginBottom: "50px"}}>
+    <div className="profile-section" style={{ marginBottom: "50px" }}>
       <label htmlFor="profileImageInput" className="profile-image-label">
         <img src={profileImage} alt="Profile" className="profile-img" />
       </label>
@@ -112,6 +114,7 @@ const ProfileSection = ({ user, setUser }) => {
           <h2>{user.fullName}</h2>
           <p>{user.email}</p>
           <button className="edit-btn" onClick={handleEditToggle}>Edit Profile</button>
+         
         </div>
       )}
     </div>
