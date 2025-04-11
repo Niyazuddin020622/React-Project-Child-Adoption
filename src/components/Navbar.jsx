@@ -96,32 +96,22 @@ const Navbar = () => {
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li className="nav-item dropdown">
-                  <a
-                    className="dropdown-item dropdown-toggle"
-                    href="#"
-                    id="indianParentsDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Resident Indian Parents
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <Link className="dropdown-item" to="/register">
-                        Already Registered Parents
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/login">
-                        New Register Parents
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
-                <li>
+                 
+                  
                   <Link className="dropdown-item" to="/adoption-stories">
                     Adoption Stories
+                  </Link>
+                  <Link className="dropdown-item" to="/guide-adopt">
+                    Guide to Adoption
+                  </Link>
+                  <Link className="dropdown-item" to="/parenting-tips">
+                    parenting tips
+                  </Link>
+                  <Link className="dropdown-item" to="/support-group">
+                    support group
+                  </Link>
+                  <Link className="dropdown-item" to="/legal-reasource">
+                  legal reasource
                   </Link>
                 </li>
               </ul>
