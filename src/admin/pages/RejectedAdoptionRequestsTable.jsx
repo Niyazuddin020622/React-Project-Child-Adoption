@@ -1,10 +1,10 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 
-const ApprovedAdoptionRequestsTable = ({ successfulRequests }) => {
+const RejectedAdoptionRequestsTable = ({ rejectedRequests }) => {
   return (
     <>
-      <h3 className="mt-4">Approved Adoption Requests</h3>
+      <h3 className="mt-4">Rejected Adoption Requests</h3> {/* ✅ Corrected heading */}
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -15,22 +15,20 @@ const ApprovedAdoptionRequestsTable = ({ successfulRequests }) => {
             <th>Phone</th>
             <th>Address</th>
             <th>Occupation</th>
-            <th>Approved Date</th>
+            <th>Rejected Date</th>
           </tr>
         </thead>
         <tbody>
-          {successfulRequests.map((request) => (
-            <tr key={request._id}>
-              {" "}
-              {/* ✅ Unique key use karein */}
-                <td>{request._id}</td>
+          {rejectedRequests.map((request, index) => (
+            <tr key={request._id || index}> {/* ✅ Added fallback key */}
+              <td>{index + 1}</td> {/* ✅ Sequential numbering */}
               <td>{request.fullName}</td>
               <td>{request.child ? request.child.name : "N/A"}</td>
               <td>{request.email}</td>
               <td>{request.phone}</td>
               <td>{request.address}</td>
               <td>{request.occupation}</td>
-              <td>{new Date(request.adoptionDate).toLocaleDateString()}</td>
+              <td>{request.adoptionDate ? new Date(request.adoptionDate).toLocaleDateString() : "N/A"}</td>
             </tr>
           ))}
         </tbody>
@@ -39,4 +37,4 @@ const ApprovedAdoptionRequestsTable = ({ successfulRequests }) => {
   );
 };
 
-export default ApprovedAdoptionRequestsTable;
+export default RejectedAdoptionRequestsTable;

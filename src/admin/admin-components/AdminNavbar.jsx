@@ -56,8 +56,7 @@ function AdminNavbar() {
             
             <NavDropdown title="Settings" className="text-white fw-bold">
               <NavDropdown.Item as={Link} to="/admin-profile" onClick={() => setExpanded(false)}>Admin Profile</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/change-password" onClick={() => setExpanded(false)}>Change Password</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/site-settings" onClick={() => setExpanded(false)}>Site Settings</NavDropdown.Item>
+              
             </NavDropdown>
           </Nav>
           

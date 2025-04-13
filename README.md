@@ -1,45 +1,8 @@
+# React + Vite
 
-# Frontend Setup (React + Axios + Bootstrap)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Installed Packages
+Currently, two official plugins are available:
 
-### 1️⃣ Core Dependencies
-
-- **react** - Frontend library.
-- **react-dom** - React rendering engine.
-- **react-router-dom** - Handles routing in React.
-
-### 2️⃣ HTTP Requests & API Calls
-
-- **axios** - Makes HTTP requests to the backend.
-
-### 3️⃣ Styling & UI
-
-- **bootstrap** - Prebuilt CSS for styling components.
-
-### 4️⃣ WebSockets (Real-time Communication)
-
-- **socket.io-client** - Connects React frontend to the WebSocket server.
-
-## Installation Guide
-
-Run the following command to install all dependencies:
-
-```sh
-npm install react react-dom react-router-dom axios bootstrap socket.io-client
-```
-
-## Running the Frontend
-
-```sh
-npm run dev
-```
-
----
-
-### 🚀 Notes
-
-- Make sure **backend** is running before testing the frontend.
-- Check `.env` for API URLs and database connections.
-- Use `npm run dev` for auto-reloading during development (if set up in `package.json`).
-
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

@@ -18,6 +18,7 @@ import ManageChildren from "./admin/admin-manages/ManageChildren";
 import ManageDonations from "./admin/admin-manages/ManageDonations";
 import AdminRegister from "./admin/authentication/AdminRegister";
 import AdminLogin from "./admin/authentication/AdminLogin";
+import AdminProfile from "./admin/admin-profile/AdminProfile";
 
 
 
@@ -70,6 +71,7 @@ const App = () => {
          <Route path="/admin-register" element={<AdminRegister />} />
          <Route path="/admin-login" element={<AdminLogin />} />
          <Route path="/manage-contact" element={<AdminLayout><ManageContact/></AdminLayout>}  />
+         <Route path="/admin-profile" element={<AdminLayout><AdminProfile/></AdminLayout>}  />
       </Routes>
       {/* <Footer /> */}
     </Router>

@@ -20,6 +20,7 @@ import Parents from "./ParentsPages/AdoptionStoryPage"; //ye niyazuddin add kiya
 import LiveChat from "./chat/LiveChat";
 import UserProfile from "./userProfile/UserProfile";
 import EventRegister from "./HomePages/event_register";
+import ForgotPassword from "./login-register/ForgotPassword";
 
 const App = () => {
   return (
@@ -108,6 +109,14 @@ const App = () => {
             </UserLayout>
           }
         />{" "}
+        <Route
+          path="/forgot-password"
+          element={
+            <UserLayout>
+              <ForgotPassword/>
+            </UserLayout>
+          }
+        />
         {/*ye niyazuddin add kiya hai*/}
         <Route
           path="/adoption-stories"

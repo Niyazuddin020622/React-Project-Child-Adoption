@@ -82,7 +82,7 @@ const ProfileSection = ({ user, setUser }) => {
             placeholder="Email"
           />
           <input
-            type="date"
+            type="text"
             name="dob"
             value={editedUser.dob}
             onChange={handleInputChange}
