@@ -104,5 +104,114 @@
       font-size: 14px;
       padding: 8px;
     }
+    /* Contact History Section */
+.contact-history {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+
+.contact-history h2 {
+  color: #007bff;
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-list li {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.contact-list li:hover {
+  background: #e9ecef;
+  transform: scale(1.02);
+}
+
+.contact-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.contact-date {
+  font-size: 14px;
+  color: #666;
+}
+
+.contact-history-btn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #ff8c00;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.contact-history-btn:hover {
+  background: #e07b00;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .contact-history {
+      width: 90%;
+      padding: 15px;
+  }
+
+  .contact-list li {
+      font-size: 14px;
+      padding: 10px;
+  }
+
+  .contact-history-btn,
+  .back-btn {
+      font-size: 14px;
+      padding: 8px;
+  }
+}
+
+    
   }
   

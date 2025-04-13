@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileSection from "./ProfileSection";
 import AdoptionHistory from "./AdoptionHistory";
+import ContactHistory from "./ContactHistory";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./UserProfile.css";
 
@@ -48,14 +49,21 @@ const UserProfile = () => {
         >
           Adoption History
         </button>
+        <button
+          className={`btn ${activeTab === "contacthistory" ? "btn-primary" : "btn-outline-primary"} rounded-pill px-4`}
+          onClick={() => setActiveTab("contacthistory")}
+        >
+          Contact History
+        </button>
       </div>
 
       <div className="mt-4 fade-in">
         {activeTab === "profile" && user && <ProfileSection user={user} setUser={setUser} />}
         {activeTab === "history" && user && <AdoptionHistory userId={user._id} />}
+        {activeTab === "contacthistory" && user && <ContactHistory userId={user._id} />}
       </div>
     </div>
   );
 };
 
-export default UserProfile; 
+export default UserProfile;

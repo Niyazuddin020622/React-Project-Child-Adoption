@@ -4,8 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../CSS/About.css";
 import about1 from  "../assets/about1.jpg";
-import about2 from  "../assets/about2.jpg";
-import about4 from  "../assets/about4.jpg";
+import about2 from  "../assets/niyazuddin.jpeg";
+import about3 from  "../assets/rani.jpeg";
+import about4 from  "../assets/alok.jpeg";
+
 
 const About = () => {
   return (
@@ -120,36 +122,28 @@ const About = () => {
           <div className="col-md-4">
             <div className="team-card position-relative">
               <img
-                src="https://img.freepik.com/premium-photo/image-happy-young-excited-emotional-man-posing-isolated-white-wall-showing-okay-gesture-sitting-floor_171337-102639.jpg?w=1060"
-                alt="John Doe"
+                src={about2}
+                alt="Niyazuddin Ansari"
                 className="img-fluid shadow-lg team-img"
+                style={{ height: "300px", objectFit: "cover" }}
               />
               <div className="team-details text-center p-3">
-                <h5 className="fw-bold">John Doe</h5>
+                <h5 className="fw-bold">Niyazuddin Ansari</h5>
                 <p className="text-muted">Founder & CEO</p>
-                <p className="small">
-                  Age: 42 <br />
-                  Expertise: Child Adoption Specialist <br />
-                  Motto: "Building families, one child at a time."
-                </p>
               </div>
             </div>
           </div>
           <div className="col-md-4">
             <div className="team-card position-relative">
               <img
-                src={about2}
-                alt="Jane Smith"
+                src={about3}
+                alt="Rani Kumari"
                 className="img-fluid shadow-lg team-img"
+                style={{ height: "300px", objectFit: "cover" }}
               />
               <div className="team-details text-center p-3">
-                <h5 className="fw-bold">Jane Smith</h5>
+                <h5 className="fw-bold">Rani Kumari</h5>
                 <p className="text-muted">Adoption Specialist</p>
-                <p className="small">
-                  Age: 35 <br />
-                  Expertise: Family Counseling <br />
-                  Motto: "Every child deserves a loving home."
-                </p>
               </div>
             </div>
           </div>
@@ -157,17 +151,13 @@ const About = () => {
             <div className="team-card position-relative">
               <img
                 src={about4}
-                alt="Emily Johnson"
+                alt="Alok Kumar"
                 className="img-fluid shadow-lg team-img"
+                style={{ height: "300px", objectFit: "cover" }}
               />
               <div className="team-details text-center p-3">
-                <h5 className="fw-bold">Emily Johnson</h5>
+                <h5 className="fw-bold">Alok Kumar</h5>
                 <p className="text-muted">Social Worker</p>
-                <p className="small">
-                  Age: 29 <br />
-                  Expertise: Child Welfare <br />
-                  Motto: "Creating bonds that last a lifetime."
-                </p>
               </div>
             </div>
           </div>
@@ -256,7 +246,7 @@ const About = () => {
           Your donation and volunteer efforts help create forever families for
           children in need.
         </p>
-        <a href="/donate" className="btn btn-success btn-lg px-4 py-2">
+        <a href="/Donates" className="btn btn-success btn-lg px-4 py-2">
           Donate Now
         </a>
       </div>

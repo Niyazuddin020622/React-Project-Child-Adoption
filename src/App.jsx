@@ -14,13 +14,22 @@ import Gallery from "./GalleryPages/Gallery";
 import AdoptNow from "./components/AdoptNow";
 import Home from "./components/Home";
 import Donates from "./components/Donates";
-import Login from "./login-register/Login"; //ye bhi niyazuddin add kiya hai
-import Register from "./login-register/Register"; //Niyazuddin ye add kiya hai
-import Parents from "./ParentsPages/AdoptionStoryPage"; //ye niyazuddin add kiya hai
+import Login from "./login-register/Login"; 
+import Register from "./login-register/Register"; 
+import Parents from "./ParentsPages/AdoptionStoryPage"; 
 import LiveChat from "./chat/LiveChat";
 import UserProfile from "./userProfile/UserProfile";
 import EventRegister from "./HomePages/event_register";
+<<<<<<< HEAD
 import ForgotPassword from "./login-register/ForgotPassword";
+=======
+import Guide_to_adoption from "./ParentsPages/Guide_to_adoption"; 
+import ParentsTips from "./ParentsPages/ParentsTips";
+import SupportGroups from "./ParentsPages/SupportGroups";
+import LegalResources from "./ParentsPages/LegaleResources";
+
+
+>>>>>>> e8f580dbe72e006447c96fd6f4510ad3c4a81b45
 
 const App = () => {
   return (
@@ -126,6 +135,38 @@ const App = () => {
             </UserLayout>
           }
         />
+<Route
+          path="/guide-adopt"
+          element={
+            <UserLayout>
+              <Guide_to_adoption />
+            </UserLayout>
+          }
+        />
+        <Route
+          path="/parenting-tips"
+          element={
+            <UserLayout>
+              <ParentsTips />
+            </UserLayout>
+          }
+        />
+        <Route
+          path="/support-group"
+          element={
+            <UserLayout>
+              <SupportGroups />
+            </UserLayout>
+          }
+/>
+<Route
+          path="/legal-reasource"
+          element={
+            <UserLayout>
+              <LegalResources />
+            </UserLayout>
+          }
+/>
         <Route
           path="/donates"
           element={

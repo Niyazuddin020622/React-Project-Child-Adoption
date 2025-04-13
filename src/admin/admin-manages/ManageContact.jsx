@@ -8,25 +8,18 @@ function ManageContact() {
   const [showModal, setShowModal] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
   const [selectedReply, setSelectedReply] = useState("");
-  const [ignoredContacts, setIgnoredContacts] = useState({});
-  const [repliedContacts, setRepliedContacts] = useState({});
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/user")
-      .then((response) => {
-        setContacts(response.data);
-      })
-      .catch((error) => console.error("Error fetching contact data:", error));
-
-    const ignored = JSON.parse(localStorage.getItem("ignoredContacts")) || {};
-    setIgnoredContacts(ignored);
+    fetchContacts();
   }, []);
 
-  const handleIgnore = (contactId) => {
-    const updatedIgnoredContacts = { ...ignoredContacts, [contactId]: true };
-    setIgnoredContacts(updatedIgnoredContacts);
-    localStorage.setItem("ignoredContacts", JSON.stringify(updatedIgnoredContacts));
+  const fetchContacts = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/user");
+      setContacts(response.data);
+    } catch (error) {
+      console.error("Error fetching contact data:", error);
+    }
   };
 
   const handleReply = (contact) => {
@@ -36,28 +29,27 @@ function ManageContact() {
 
   const handleSendReply = async () => {
     if (!selectedReply) return alert("Please select a response!");
-  
+
     try {
-      console.log("Sending reply to:", selectedContact.email);
-      console.log("Message:", selectedReply);
-  
-      const response = await axios.post("http://localhost:3000/api/user/reply", {
+      await axios.post("http://localhost:3000/api/user/reply", {
         contactId: selectedContact._id,
         message: selectedReply,
       });
-  
-      if (response.status === 200) {
-        console.log("Reply sent successfully!");
-        setRepliedContacts((prev) => ({ ...prev, [selectedContact._id]: true }));
-        alert("Reply sent successfully!");
-        setShowModal(false);
-      }
+
+      alert("Reply saved successfully!");
+      setContacts((prev) =>
+        prev.map((c) =>
+          c._id === selectedContact._id
+            ? { ...c, adminReply: selectedReply, replied: true }
+            : c
+        )
+      );
+      setShowModal(false);
     } catch (error) {
-      console.error("Error sending reply:", error.response?.data || error);
-      alert("Failed to send reply. Check console for details.");
+      console.error("Error saving reply:", error);
+      alert("Failed to save reply.");
     }
   };
-  
 
   const predefinedReplies = [
     "Thank you for reaching out!",
@@ -81,6 +73,7 @@ function ManageContact() {
             <th>Name</th>
             <th>Email</th>
             <th>Message</th>
+            <th>Admin Reply</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -92,20 +85,21 @@ function ManageContact() {
                 <td>{contact.email}</td>
                 <td>{contact.message}</td>
                 <td>
-                  {repliedContacts[contact._id] ? (
-                    <span className="badge bg-success">Replied Successfully</span>
-                  ) : ignoredContacts[contact._id] ? (
-                    <span className="badge bg-secondary">Ignored</span>
-                  ) : (
+                  {contact.ignored ? (
+                    <span className="badge bg-danger">Ignored</span>
+                  ) : contact.adminReply ? (
                     <>
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        className="me-2"
-                        onClick={() => handleIgnore(contact._id)}
-                      >
-                        Ignore
-                      </Button>
+                      <span className="badge bg-success">Replied</span>
+                      <br />
+                      {contact.adminReply}
+                    </>
+                  ) : (
+                    <span className="text-muted">No reply yet</span>
+                  )}
+                </td>
+                <td>
+                  {!contact.adminReply && !contact.ignored && (
+                    <>
                       <DropdownButton
                         title="Reply"
                         variant="primary"
@@ -134,7 +128,7 @@ function ManageContact() {
             ))
           ) : (
             <tr>
-              <td colSpan="4" className="text-center">
+              <td colSpan="5" className="text-center">
                 No contacts found.
               </td>
             </tr>
@@ -160,7 +154,7 @@ function ManageContact() {
             Cancel
           </Button>
           <Button variant="success" onClick={handleSendReply}>
-            Confirm & Send
+            Confirm & Save
           </Button>
         </Modal.Footer>
       </Modal>
