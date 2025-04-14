@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
   const [admin, setAdmin] = useState({
-    
     email: "",
     password: "",
   });
@@ -34,15 +33,19 @@ const AdminLogin = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Login Successful!");
-        localStorage.setItem("adminToken", data.token); // Store token
-        navigate("/admin-dashboard"); // Redirect to Admin Dashboard
+        // Save session data and redirect
+        localStorage.setItem("adminToken", data.token);
+        localStorage.setItem("adminEmail", admin.email); // Store email too
+        setTimeout(() => {
+          alert("Login Successful!");
+          navigate("/admin-dashboard");
+        }, 3000); // Delay to show spinner before redirect
       } else {
         setError(data.message || "Invalid Credentials!");
+        setLoading(false);
       }
     } catch (error) {
       setError("Something went wrong!");
-    } finally {
       setLoading(false);
     }
   };
@@ -54,7 +57,17 @@ const AdminLogin = () => {
           <div className="card shadow-lg">
             <div className="card-body">
               <h3 className="text-center mb-4">Admin Login</h3>
+
               {error && <div className="alert alert-danger">{error}</div>}
+
+              {loading && (
+                <div className="d-flex justify-content-center mb-3">
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              )}
+
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label className="form-label">Email</label>
@@ -78,12 +91,18 @@ const AdminLogin = () => {
                     required
                   />
                 </div>
-                <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                <button
+                  type="submit"
+                  className="btn btn-primary w-100"
+                  disabled={loading}
+                >
                   {loading ? "Logging in..." : "Login"}
                 </button>
               </form>
+
               <p className="mt-3 text-center">
-                Don't have an account? <a href="/admin-register">Register</a>
+                Don't have an account?{" "}
+                <a href="/admin-register">Register</a>
               </p>
             </div>
           </div>
