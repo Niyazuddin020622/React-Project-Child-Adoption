@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -7,16 +7,37 @@ function ContactHistory() {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    fetchContacts();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userEmail = user?.email;
+
+    if (!userEmail) return;
+
+    axios
+      .get("http://localhost:3000/api/user/fetch")
+      .then((response) => {
+        const userMessages = response.data.filter(
+          (contact) => contact.email === userEmail
+        );
+        setContacts(userMessages);
+      })
+      .catch((error) =>
+        console.error("Error fetching contact history:", error)
+      );
   }, []);
 
-  const fetchContacts = () => {
+  // Handle message deletion
+  const handleDelete = (contactId) => {
     axios
-      .get("http://localhost:3000/api/user/")
-      .then((response) => {
-        setContacts(response.data);
+      .delete(`http://localhost:3000/api/user/contact/delete/${contactId}`)
+      .then(() => {
+        // Remove the deleted contact from the state
+        setContacts((prevContacts) =>
+          prevContacts.filter((contact) => contact._id !== contactId)
+        );
       })
-      .catch((error) => console.error("Error fetching contact history:", error));
+      .catch((error) => {
+        console.error("Error deleting message:", error);
+      });
   };
 
   return (
@@ -26,9 +47,11 @@ function ContactHistory() {
         <thead className="table-dark">
           <tr>
             <th>ID</th>
-            <th>Message</th>
-            <th>Reply</th>
+            <th>Name</th>
+            <th>Your Message</th>
+            <th>Admin's Reply</th>
             <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -36,30 +59,41 @@ function ContactHistory() {
             contacts.map((contact) => (
               <tr key={contact._id}>
                 <td>{contact._id}</td>
-                <td>{contact.message}</td>
+                <td>{contact.name}</td>
+                <td className="text-primary">{contact.message}</td>
                 <td>
                   {contact.ignored ? (
                     <span className="text-danger">Ignored Message</span>
                   ) : contact.adminReply ? (
-                    contact.adminReply
+                    <span className="text-success">{contact.adminReply}</span>
                   ) : (
-                    <span className="text-muted">No reply</span>
+                    <span className="text-muted">No reply yet</span>
                   )}
                 </td>
                 <td>
                   {contact.ignored ? (
-                    <span className="text-danger">Ignored</span>
+                    <span className="badge bg-danger">Ignored</span>
                   ) : contact.adminReply ? (
-                    <span className="text-success">Replied</span>
+                    <span className="badge bg-success">Replied</span>
                   ) : (
-                    <span className="text-warning">Pending</span>
+                    <span className="badge bg-warning text-dark">Pending</span>
                   )}
+                </td>
+                <td>
+                  {/* Delete Button */}
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => handleDelete(contact._id)}
+                  >
+                    Delete
+                  </Button>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="4" className="text-center">
+              <td colSpan="6" className="text-center">
                 No contact history found.
               </td>
             </tr>

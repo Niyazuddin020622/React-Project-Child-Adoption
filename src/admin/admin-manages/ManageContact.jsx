@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Modal, Dropdown, DropdownButton } from "react-bootstrap";
+import { Table, Button, Modal } from "react-bootstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -15,7 +15,7 @@ function ManageContact() {
 
   const fetchContacts = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/user");
+      const response = await axios.get("http://localhost:3000/api/user/fetch");
       setContacts(response.data);
     } catch (error) {
       console.error("Error fetching contact data:", error);
@@ -24,11 +24,14 @@ function ManageContact() {
 
   const handleReply = (contact) => {
     setSelectedContact(contact);
+    setSelectedReply(""); // Clear previous reply
     setShowModal(true);
   };
 
   const handleSendReply = async () => {
-    if (!selectedReply) return alert("Please select a response!");
+    if (!selectedReply.trim()) {
+      return alert("Please enter a reply message!");
+    }
 
     try {
       await axios.post("http://localhost:3000/api/user/reply", {
@@ -50,19 +53,6 @@ function ManageContact() {
       alert("Failed to save reply.");
     }
   };
-
-  const predefinedReplies = [
-    "Thank you for reaching out!",
-    "We have received your message.",
-    "Our team will get back to you soon.",
-    "Please check our FAQs for more info.",
-    "Your request is being processed.",
-    "We'll contact you shortly.",
-    "Can you provide more details?",
-    "Your issue is under review.",
-    "We appreciate your patience.",
-    "Thank you for your feedback!",
-  ];
 
   return (
     <div className="container mt-4">
@@ -98,30 +88,14 @@ function ManageContact() {
                   )}
                 </td>
                 <td>
-                  {!contact.adminReply && !contact.ignored && (
-                    <>
-                      <DropdownButton
-                        title="Reply"
-                        variant="primary"
-                        size="sm"
-                        className="d-inline-block"
-                        onSelect={(reply) => setSelectedReply(reply)}
-                      >
-                        {predefinedReplies.map((reply, index) => (
-                          <Dropdown.Item key={index} eventKey={reply}>
-                            {reply}
-                          </Dropdown.Item>
-                        ))}
-                      </DropdownButton>
-                      <Button
-                        variant="success"
-                        size="sm"
-                        className="ms-2"
-                        onClick={() => handleReply(contact)}
-                      >
-                        Send
-                      </Button>
-                    </>
+                  {!contact.ignored && (
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => handleReply(contact)}
+                    >
+                      Reply
+                    </Button>
                   )}
                 </td>
               </tr>
@@ -136,17 +110,35 @@ function ManageContact() {
         </tbody>
       </Table>
 
+      {/* Reply Modal with Text Area */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Send Reply</Modal.Title>
+          <Modal.Title>Reply to Message</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedContact && (
-            <p>
-              Send the following reply to <strong>{selectedContact.name}</strong>?
-              <br />
-              <strong>Message:</strong> {selectedReply}
-            </p>
+            <>
+              <p>
+                <strong>To:</strong> {selectedContact.name} (
+                {selectedContact.email})
+              </p>
+              <p>
+                <strong>Message Received:</strong> {selectedContact.message}
+              </p>
+              <div className="mb-3">
+                <label htmlFor="adminReply" className="form-label">
+                  Your Reply:
+                </label>
+                <textarea
+                  id="adminReply"
+                  className="form-control"
+                  rows="4"
+                  placeholder="Type your reply here..."
+                  value={selectedReply}
+                  onChange={(e) => setSelectedReply(e.target.value)}
+                ></textarea>
+              </div>
+            </>
           )}
         </Modal.Body>
         <Modal.Footer>
@@ -154,7 +146,7 @@ function ManageContact() {
             Cancel
           </Button>
           <Button variant="success" onClick={handleSendReply}>
-            Confirm & Save
+            Send Reply
           </Button>
         </Modal.Footer>
       </Modal>
