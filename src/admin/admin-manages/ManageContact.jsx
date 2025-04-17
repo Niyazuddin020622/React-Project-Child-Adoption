@@ -43,7 +43,7 @@ function ManageContact() {
       setContacts((prev) =>
         prev.map((c) =>
           c._id === selectedContact._id
-            ? { ...c, adminReply: selectedReply, replied: true }
+            ? { ...c, adminReply: selectedReply }
             : c
         )
       );
@@ -52,6 +52,20 @@ function ManageContact() {
       console.error("Error saving reply:", error);
       alert("Failed to save reply.");
     }
+  };
+
+  const getReplyStatus = (reply) => {
+    if (!reply) return <span className="text-muted">No reply yet</span>;
+    if (reply.trim().toLowerCase() === "ignore") {
+      return <span className="badge bg-danger">Ignored</span>;
+    }
+    return (
+      <>
+        <span className="badge bg-success">Replied</span>
+        <br />
+        {reply}
+      </>
+    );
   };
 
   return (
@@ -74,21 +88,10 @@ function ManageContact() {
                 <td>{contact.name}</td>
                 <td>{contact.email}</td>
                 <td>{contact.message}</td>
+                <td>{getReplyStatus(contact.adminReply)}</td>
                 <td>
-                  {contact.ignored ? (
-                    <span className="badge bg-danger">Ignored</span>
-                  ) : contact.adminReply ? (
-                    <>
-                      <span className="badge bg-success">Replied</span>
-                      <br />
-                      {contact.adminReply}
-                    </>
-                  ) : (
-                    <span className="text-muted">No reply yet</span>
-                  )}
-                </td>
-                <td>
-                  {!contact.ignored && (
+                  {(!contact.adminReply ||
+                    contact.adminReply.trim().toLowerCase() !== "ignore") && (
                     <Button
                       variant="primary"
                       size="sm"
@@ -110,7 +113,7 @@ function ManageContact() {
         </tbody>
       </Table>
 
-      {/* Reply Modal with Text Area */}
+      {/* Reply Modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Reply to Message</Modal.Title>

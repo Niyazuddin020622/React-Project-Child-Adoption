@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -25,19 +25,20 @@ function ContactHistory() {
       );
   }, []);
 
-  // Handle message deletion
-  const handleDelete = (contactId) => {
-    axios
-      .delete(`http://localhost:3000/api/user/contact/delete/${contactId}`)
-      .then(() => {
-        // Remove the deleted contact from the state
-        setContacts((prevContacts) =>
-          prevContacts.filter((contact) => contact._id !== contactId)
-        );
-      })
-      .catch((error) => {
-        console.error("Error deleting message:", error);
-      });
+  const getReplyStatus = (reply) => {
+    if (!reply) return <span className="badge bg-warning text-dark">Pending</span>;
+    if (reply.trim().toLowerCase() === "ignore") {
+      return <span className="badge bg-danger">Ignored</span>;
+    }
+    return <span className="badge bg-success">Replied</span>;
+  };
+
+  const getReplyText = (reply) => {
+    if (!reply) return <span className="text-muted">No reply yet</span>;
+    if (reply.trim().toLowerCase() === "ignore") {
+      return <span className="text-danger">Ignored Message</span>;
+    }
+    return <span className="text-success">{reply}</span>;
   };
 
   return (
@@ -51,7 +52,6 @@ function ContactHistory() {
             <th>Your Message</th>
             <th>Admin's Reply</th>
             <th>Status</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -61,39 +61,13 @@ function ContactHistory() {
                 <td>{contact._id}</td>
                 <td>{contact.name}</td>
                 <td className="text-primary">{contact.message}</td>
-                <td>
-                  {contact.ignored ? (
-                    <span className="text-danger">Ignored Message</span>
-                  ) : contact.adminReply ? (
-                    <span className="text-success">{contact.adminReply}</span>
-                  ) : (
-                    <span className="text-muted">No reply yet</span>
-                  )}
-                </td>
-                <td>
-                  {contact.ignored ? (
-                    <span className="badge bg-danger">Ignored</span>
-                  ) : contact.adminReply ? (
-                    <span className="badge bg-success">Replied</span>
-                  ) : (
-                    <span className="badge bg-warning text-dark">Pending</span>
-                  )}
-                </td>
-                <td>
-                  {/* Delete Button */}
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => handleDelete(contact._id)}
-                  >
-                    Delete
-                  </Button>
-                </td>
+                <td>{getReplyText(contact.adminReply)}</td>
+                <td>{getReplyStatus(contact.adminReply)}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="6" className="text-center">
+              <td colSpan="5" className="text-center">
                 No contact history found.
               </td>
             </tr>

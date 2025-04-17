@@ -89,7 +89,8 @@ const ViewReports = () => {
         <Col md={3}>
           <Card className="text-center shadow-sm">
             <Card.Body>
-              <FaDollarSign size={40} className="mb-3 text-success" />
+            <span className="text-success mb-3" style={{ fontSize: '40px' }}>₹</span>
+
               <Card.Title>Total Donation</Card.Title>
               <Card.Text>₹{totalDonationAmount.toLocaleString()}</Card.Text>
             </Card.Body>
