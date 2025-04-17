@@ -4,12 +4,14 @@ import StatsSection from "./StatsSection";
 import PendingAdoptionRequestsTable from "./PendingAdoptionRequestsTable";
 import ApprovedAdoptionRequestsTable from "./ApprovedAdoptionRequestsTable";
 import AdminAdoptionManagement from "./AdminAdoptionManagement";
+import RejectedAdoptionRequestsTable from "./RejectedAdoptionRequestsTable";
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [children, setChildren] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [successfulRequests, setSuccessfulRequests] = useState([]);
+  const [rejectedRequests, setRejectedRequests] = useState([]);
 
   useEffect(() => {
     // Fetch users
@@ -30,6 +32,7 @@ const AdminDashboard = () => {
       .then((data) => {
         setPendingRequests(data.filter((adoption) => adoption.status === "Pending"));
         setSuccessfulRequests(data.filter((adoption) => adoption.status === "Approved"));
+        setRejectedRequests(data.filter((adoption) => adoption.status === "Rejected"));
       })
       .catch((error) => console.error("Error fetching adoption requests:", error));
   }, []);
@@ -44,11 +47,13 @@ const AdminDashboard = () => {
         childrenCount={children.length} 
         pendingCount={pendingRequests.length} 
         successCount={successfulRequests.length} 
+        rejectedCount={rejectedRequests.length} 
       />
 
       {/* Pending & Approved Requests */}
       <PendingAdoptionRequestsTable pendingRequests={pendingRequests} />
       <ApprovedAdoptionRequestsTable successfulRequests={successfulRequests} />
+      <RejectedAdoptionRequestsTable rejectedRequests={rejectedRequests} />
 
       {/* Adoption Management Component */}
       <AdminAdoptionManagement />

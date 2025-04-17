@@ -65,7 +65,10 @@ const ChildAdoptionLogin = () => {
               Don't have an account? <Link to="/register">Register here</Link>
             </p>
             <p className="mt-2">
-              <button type="button" className="btn btn-link p-0">Forgot Password?</button>
+            <button type="button" className="btn btn-link p-0">
+  <Link to="/forgot-password">Forgot Password?</Link>
+</button>
+
             </p>
           </form>
         </div>

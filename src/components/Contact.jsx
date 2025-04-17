@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../CSS/Contact.css";
 import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
+    name: "",  // Changed fullName to name
     email: "",
     message: "",
   });
   const [responseMessage, setResponseMessage] = useState("");
+
+  // Auto-fill name and email for logged-in user
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setFormData((prev) => ({
+        ...prev,
+        name: user.fullName || "",  // Changed fullName to name
+        email: user.email || "",
+      }));
+    }
+  }, []);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -19,19 +31,27 @@ const Contact = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    const user = JSON.parse(localStorage.getItem("user"));
+    const updatedFormData = {
+      ...formData,
+      name: user?.fullName || formData.name, // Changed fullName to name
+      email: user?.email || formData.email,
+    };
+  
     try {
-      const response = await fetch("http://localhost:3000/api/user/contact", {
+      const response = await fetch("http://localhost:3000/api/user/message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedFormData),
       });
-
+  
       const data = await response.json();
       if (response.ok) {
         setResponseMessage("Message sent successfully!");
-        setFormData({ name: "", email: "", message: "" }); // Reset form
+        setFormData({ ...formData, message: "" });
       } else {
         setResponseMessage(data.error || "Something went wrong");
       }
@@ -42,7 +62,6 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
-      {/* Header Section */}
       <header className="contact-header text-center py-5 position-relative">
         <div className="running-text">
           <span>
@@ -50,12 +69,10 @@ const Contact = () => {
             &nbsp; | &nbsp; "Every child deserves a loving home. Adopt and make a difference. 🏡"
           </span>
         </div>
-
         <div
           className="header-background"
           style={{
-            backgroundImage:
-              'url("https://images.unsplash.com/photo-1615723411974-ed6cf1a6180a?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D")',
+            backgroundImage: 'url("https://images.unsplash.com/photo-1615723411974-ed6cf1a6180a?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D")',
             backgroundSize: "cover",
             backgroundPosition: "center",
             minHeight: "300px",
@@ -67,13 +84,13 @@ const Contact = () => {
           <h1 className="display-4 fw-bold">Get in Touch</h1>
           <p className="text-light fs-5">We'd love to hear from you!</p>
         </div>
-      </header> 
+      </header>
 
       <div className="container py-5">
         <div className="row">
           <div className="col-lg-6">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118147.68696443523!2d70.73872349317425!3d22.273624940214702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959c98ac71cdf0f%3A0x76dd15cfbe93ad3b!2sRajkot%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1737823552628!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?..."
               width="100%"
               height="480"
               style={{ border: 0, borderRadius: "10px" }}
@@ -89,9 +106,7 @@ const Contact = () => {
               {responseMessage && <p className="alert alert-info">{responseMessage}</p>}
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
-                    Full Name
-                  </label>
+                  <label htmlFor="name" className="form-label">Full Name</label>
                   <input
                     type="text"
                     id="name"
@@ -100,13 +115,12 @@ const Contact = () => {
                     placeholder="Your name"
                     value={formData.name}
                     onChange={handleChange}
+                    disabled
                     required
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email
-                  </label>
+                  <label htmlFor="email" className="form-label">Email</label>
                   <input
                     type="email"
                     id="email"
@@ -115,13 +129,12 @@ const Contact = () => {
                     placeholder="Your email"
                     value={formData.email}
                     onChange={handleChange}
+                    disabled
                     required
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="message" className="form-label">
-                    Message
-                  </label>
+                  <label htmlFor="message" className="form-label">Message</label>
                   <textarea
                     id="message"
                     name="message"
@@ -133,9 +146,7 @@ const Contact = () => {
                     required
                   ></textarea>
                 </div>
-                <button type="submit" className="btn btn-primary w-100">
-                  Send Message
-                </button>
+                <button type="submit" className="btn btn-primary w-100">Send Message</button>
               </form>
             </div>
           </div>

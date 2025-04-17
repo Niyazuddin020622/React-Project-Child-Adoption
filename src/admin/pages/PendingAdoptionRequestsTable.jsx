@@ -15,7 +15,7 @@ const PendingAdoptionRequestsTable = ({ pendingRequests }) => {
             <th>Phone</th>
             <th>Address</th>
             <th>Occupation</th>
-            <th style={{ width: "15%" }}>Adoption Reason</th>
+            <th>Adoption Date</th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@ const PendingAdoptionRequestsTable = ({ pendingRequests }) => {
               <td>{request.phone}</td>
               <td>{request.address}</td>
               <td>{request.occupation}</td>
-                <td>{request.adoptionReason}</td>
+              <td>{request.adoptionDate ? new Date(request.adoptionDate).toLocaleDateString() : "N/A"}</td>
             </tr>
           ))}
         </tbody>

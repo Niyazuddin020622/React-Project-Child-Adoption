@@ -1,11 +1,8 @@
 import React from "react";
-// import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserLayout from "./layouts/UserLayout";
 import ScrollToTop from "./components/ScrollToTop";
 import About from "./components/About";
-// import Navbar from "./components/Navbar";
-// import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import Adoption from "./components/AdoptionResources";
 import AvailableChildren from "./components/AvailableChildren";
@@ -20,12 +17,11 @@ import Parents from "./ParentsPages/AdoptionStoryPage";
 import LiveChat from "./chat/LiveChat";
 import UserProfile from "./userProfile/UserProfile";
 import EventRegister from "./HomePages/event_register";
-import Guide_to_adoption from "./ParentsPages/Guide_to_adoption"; 
-import ParentsTips from "./ParentsPages/ParentsTips";
+import ForgotPassword from "./login-register/ForgotPassword";
+import Guide_to_adoption from "./ParentsPages/Guide_to_adoption";
+import ParentsTips  from "./ParentsPages/ParentsTips";
 import SupportGroups from "./ParentsPages/SupportGroups";
 import LegalResources from "./ParentsPages/LegaleResources";
-
-
 
 const App = () => {
   return (
@@ -114,6 +110,14 @@ const App = () => {
             </UserLayout>
           }
         />{" "}
+        <Route
+          path="/forgot-password"
+          element={
+            <UserLayout>
+              <ForgotPassword/>
+            </UserLayout>
+          }
+        />
         {/*ye niyazuddin add kiya hai*/}
         <Route
           path="/adoption-stories"

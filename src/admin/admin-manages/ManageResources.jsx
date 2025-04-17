@@ -9,8 +9,8 @@ const ManageResources = () => {
     link: '',
     buttonText: ''
   });
-
-  const [message, setMessage] = useState(null); // ✅ Success/Error Message State
+  const [message, setMessage] = useState(null); // Success/Error Message State
+  const [loading, setLoading] = useState(false); // Loading Spinner State
 
   const handleChange = (e) => {
     setResource({ ...resource, [e.target.name]: e.target.value });
@@ -18,6 +18,7 @@ const ManageResources = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Show loading spinner
 
     try {
       const response = await axios.post('http://localhost:3000/resources/create', resource);
@@ -27,9 +28,15 @@ const ManageResources = () => {
 
       // Clear the form after successful submission
       setResource({ title: '', description: '', link: '', buttonText: '' });
+
+      setTimeout(() => setMessage(null), 5000); // Clear message after 5 seconds
     } catch (error) {
       console.error('Error adding resource:', error);
       setMessage({ type: 'error', text: 'Failed to add resource. Try again!' });
+
+      setTimeout(() => setMessage(null), 5000); // Clear message after 5 seconds
+    } finally {
+      setLoading(false); // Hide loading spinner
     }
   };
 
@@ -38,7 +45,7 @@ const ManageResources = () => {
       <div className="card p-4 shadow">
         <h2 className="text-center mb-4">Manage Resources</h2>
 
-        {/* ✅ Message Section */}
+        {/* Success/Error Message */}
         {message && (
           <div className={`alert ${message.type === 'success' ? 'alert-success' : 'alert-danger'}`} role="alert">
             {message.text}
@@ -76,6 +83,8 @@ const ManageResources = () => {
               placeholder="Link" 
               className="form-control"
               required
+              pattern="https?://.*" // URL validation pattern
+              title="Please enter a valid URL (e.g. https://example.com)"
             />
           </div>
           <div className="mb-3">
@@ -89,13 +98,17 @@ const ManageResources = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100">
-            Add Resource
+          <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+            {loading ? (
+              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            ) : (
+              'Add Resource'
+            )}
           </button>
         </form>
       </div>
       <br />
-      <AdoptionResource/>
+      <AdoptionResource />
     </div>
   );
 };

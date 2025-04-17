@@ -7,16 +7,38 @@ function ContactHistory() {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    fetchContacts();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userEmail = user?.email;
+
+    if (!userEmail) return;
+
+    axios
+      .get("http://localhost:3000/api/user/fetch")
+      .then((response) => {
+        const userMessages = response.data.filter(
+          (contact) => contact.email === userEmail
+        );
+        setContacts(userMessages);
+      })
+      .catch((error) =>
+        console.error("Error fetching contact history:", error)
+      );
   }, []);
 
-  const fetchContacts = () => {
-    axios
-      .get("http://localhost:3000/api/user/")
-      .then((response) => {
-        setContacts(response.data);
-      })
-      .catch((error) => console.error("Error fetching contact history:", error));
+  const getReplyStatus = (reply) => {
+    if (!reply) return <span className="badge bg-warning text-dark">Pending</span>;
+    if (reply.trim().toLowerCase() === "ignore") {
+      return <span className="badge bg-danger">Ignored</span>;
+    }
+    return <span className="badge bg-success">Replied</span>;
+  };
+
+  const getReplyText = (reply) => {
+    if (!reply) return <span className="text-muted">No reply yet</span>;
+    if (reply.trim().toLowerCase() === "ignore") {
+      return <span className="text-danger">Ignored Message</span>;
+    }
+    return <span className="text-success">{reply}</span>;
   };
 
   return (
@@ -26,8 +48,9 @@ function ContactHistory() {
         <thead className="table-dark">
           <tr>
             <th>ID</th>
-            <th>Message</th>
-            <th>Reply</th>
+            <th>Name</th>
+            <th>Your Message</th>
+            <th>Admin's Reply</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -36,30 +59,15 @@ function ContactHistory() {
             contacts.map((contact) => (
               <tr key={contact._id}>
                 <td>{contact._id}</td>
-                <td>{contact.message}</td>
-                <td>
-                  {contact.ignored ? (
-                    <span className="text-danger">Ignored Message</span>
-                  ) : contact.adminReply ? (
-                    contact.adminReply
-                  ) : (
-                    <span className="text-muted">No reply</span>
-                  )}
-                </td>
-                <td>
-                  {contact.ignored ? (
-                    <span className="text-danger">Ignored</span>
-                  ) : contact.adminReply ? (
-                    <span className="text-success">Replied</span>
-                  ) : (
-                    <span className="text-warning">Pending</span>
-                  )}
-                </td>
+                <td>{contact.name}</td>
+                <td className="text-primary">{contact.message}</td>
+                <td>{getReplyText(contact.adminReply)}</td>
+                <td>{getReplyStatus(contact.adminReply)}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="4" className="text-center">
+              <td colSpan="5" className="text-center">
                 No contact history found.
               </td>
             </tr>
