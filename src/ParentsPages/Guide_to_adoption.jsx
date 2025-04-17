@@ -36,35 +36,37 @@ const steps = [
 
 const ParentGuide = () => {
   return (
-    <div className="container mt-5 p-4 rounded shadow-lg" style={{ maxWidth: "900px", background: "white" }}>
-      <h2 className="text-center text-primary">Parent Guide to Adoption</h2>
-      <p className="text-center">
-        Adoption is a meaningful way to provide a child with a loving and secure home. Here is a step-by-step guide for parents considering adoption.
+    <div className="container mt-5 p-4 bg-white rounded shadow-lg" style={{ maxWidth: "1000px" }}>
+      <h2 className="text-center text-primary mb-4">Parent Guide to Adoption</h2>
+      <p className="text-center mb-5">
+        Adoption is a meaningful way to provide a child with a loving and secure home.
+        Here is a step-by-step guide for parents considering adoption.
       </p>
       <div className="row g-4">
         {steps.map((step, index) => (
-          <div
-            key={index}
-            className="p-3 rounded text-white"
-            style={{
-              background: step.color,
-              boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)",
-              transition: "all 0.3s ease-in-out",
-              cursor: "pointer",
-              borderRadius: "12px",
-              transform: "scale(1)"
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "0px 10px 25px rgba(0, 0, 0, 0.3)";
-              e.currentTarget.style.transform = "scale(1.05)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "0px 5px 15px rgba(0, 0, 0, 0.2)";
-              e.currentTarget.style.transform = "scale(1)";
-            }}
-          >
-            <h3>{step.title}</h3>
-            <p>{step.text}</p>
+          <div className="col-md-6" key={index}>
+            <div
+              className="card h-100 shadow-sm border-0"
+              style={{
+                borderTop: `8px solid ${step.color}`,
+                borderRadius: "12px",
+                transition: "all 0.3s ease-in-out",
+                cursor: "pointer"
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = "0px 12px 24px rgba(0, 0, 0, 0.2)";
+                e.currentTarget.style.transform = "scale(1.02)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = "0px 5px 15px rgba(0, 0, 0, 0.1)";
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            >
+              <div className="card-body">
+                <h5 className="card-title">{step.title}</h5>
+                <p className="card-text">{step.text}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
