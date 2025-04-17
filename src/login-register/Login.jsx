@@ -24,11 +24,6 @@ const ChildAdoptionLogin = () => {
       if (response.data && response.data.user) {
         localStorage.setItem("user", JSON.stringify(response.data.user));
         setModalData({ show: true, message: "Login Successful!", isSuccess: true });
-        
-        setTimeout(() => {
-          navigate("/");
-          window.location.reload();
-        }, 3000);
       } else {
         throw new Error("Invalid API response");
       }
@@ -36,6 +31,18 @@ const ChildAdoptionLogin = () => {
       setModalData({ show: true, message: error.response?.data?.message || "Login failed!", isSuccess: false });
     } finally {
       setLoading(false);
+    }
+  };
+
+  // When user clicks modal close (×) button
+  const handleCloseModal = () => {
+    setModalData({ ...modalData, show: false });
+
+    if (modalData.isSuccess) {
+      // Success case: redirect to home.jsp
+      window.location.href = "/";
+    } else {
+      // Error case: stay on the same page (do nothing)
     }
   };
 
@@ -65,18 +72,17 @@ const ChildAdoptionLogin = () => {
               Don't have an account? <Link to="/register">Register here</Link>
             </p>
             <p className="mt-2">
-            <button type="button" className="btn btn-link p-0">
-  <Link to="/forgot-password">Forgot Password?</Link>
-</button>
-
+              <button type="button" className="btn btn-link p-0">
+                <Link to="/forgot-password">Forgot Password?</Link>
+              </button>
             </p>
           </form>
         </div>
       </div>
 
-      {/* Modal for Login Message without Close Button */}
-      <Modal show={modalData.show} centered>
-        <Modal.Header>
+      {/* Modal with Close Button */}
+      <Modal show={modalData.show} onHide={handleCloseModal} centered>
+        <Modal.Header closeButton>
           <Modal.Title>{modalData.isSuccess ? "✅ Success" : "❌ Error"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{modalData.message}</Modal.Body>
