@@ -79,13 +79,14 @@ const Donates = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(donationData),
       });
-
+      const data = await response.json(); // 👈 Add this line
       if (response.ok) {
         alert("Thank you! Your donation has been received successfully.");
         setPhone("");
         setAmount("");
         setDonationType("education");
       } else {
+        console.error("Donation failed:", data); // 👈 Log this to see the erro
         alert("Something went wrong. Please try again.");
       }
     } catch (error) {

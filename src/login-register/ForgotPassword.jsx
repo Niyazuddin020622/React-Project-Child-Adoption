@@ -22,7 +22,10 @@ const ForgotPassword = () => {
       setMessage({ text: res.data.message, type: "success" });
       setStep(2);
     } catch (err) {
-      setMessage({ text: err.response?.data?.message || "Failed to send OTP", type: "danger" });
+      setMessage({
+        text: err.response?.data?.message || "Failed to send OTP",
+        type: "danger",
+      });
     } finally {
       setLoading(false);
     }
@@ -36,7 +39,10 @@ const ForgotPassword = () => {
       setMessage({ text: res.data.message, type: "success" });
       setStep(3);
     } catch (err) {
-      setMessage({ text: err.response?.data?.message || "Failed to verify OTP", type: "danger" });
+      setMessage({
+        text: err.response?.data?.message || "Failed to verify OTP",
+        type: "danger",
+      });
     } finally {
       setLoading(false);
     }
@@ -46,11 +52,17 @@ const ForgotPassword = () => {
     setLoading(true);
     setMessage({ text: "", type: "" });
     try {
-      const res = await axios.post("http://localhost:3000/api/reset-password", { email, newPassword });
+      const res = await axios.post("http://localhost:3000/api/reset-password", {
+        email,
+        newPassword,
+      });
       setMessage({ text: res.data.message, type: "success" });
       setTimeout(() => navigate("/login"), 3000);
     } catch (err) {
-      setMessage({ text: err.response?.data?.message || "Password reset failed", type: "danger" });
+      setMessage({
+        text: err.response?.data?.message || "Password reset failed",
+        type: "danger",
+      });
     } finally {
       setLoading(false);
     }
@@ -83,8 +95,12 @@ const ForgotPassword = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <button className="btn btn-primary w-100" onClick={handleSendOTP} disabled={loading}>
-                {loading ? <Spinner size="sm" animation="border" /> : "Send OTP"}
+              <button
+                className="btn btn-primary w-100"
+                onClick={handleSendOTP}
+                disabled={loading}
+              >
+                {loading ? <Spinner animation="border" size="sm" /> : "Send OTP"}
               </button>
             </>
           )}
@@ -99,8 +115,12 @@ const ForgotPassword = () => {
                 onChange={(e) => setOtp(e.target.value)}
                 required
               />
-              <button className="btn btn-success w-100" onClick={handleVerifyOTP} disabled={loading}>
-                {loading ? <Spinner size="sm" animation="border" /> : "Verify OTP"}
+              <button
+                className="btn btn-success w-100"
+                onClick={handleVerifyOTP}
+                disabled={loading}
+              >
+                {loading ? <Spinner animation="border" size="sm" /> : "Verify OTP"}
               </button>
             </>
           )}
@@ -115,8 +135,12 @@ const ForgotPassword = () => {
                 onChange={(e) => setNewPassword(e.target.value)}
                 required
               />
-              <button className="btn btn-success w-100" onClick={handleResetPassword} disabled={loading}>
-                {loading ? <Spinner size="sm" animation="border" /> : "Reset Password"}
+              <button
+                className="btn btn-warning w-100"
+                onClick={handleResetPassword}
+                disabled={loading}
+              >
+                {loading ? <Spinner animation="border" size="sm" /> : "Reset Password"}
               </button>
             </>
           )}
