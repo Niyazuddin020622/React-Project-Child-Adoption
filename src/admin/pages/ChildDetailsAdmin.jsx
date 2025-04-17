@@ -101,7 +101,7 @@ const ChildDetailsAdmin = () => {
                   src={child.photo}
                   alt={child.name}
                   className="child-photo"
-                  style={{height:"60",width:"60px"}}
+                  style={{height:"60",width:"60px",borderRadius:"6px"}}
                 />
               </td>
 
