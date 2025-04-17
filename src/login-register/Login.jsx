@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Modal, Button, Spinner } from "react-bootstrap";
@@ -34,17 +34,24 @@ const ChildAdoptionLogin = () => {
     }
   };
 
-  // When user clicks modal close (×) button
   const handleCloseModal = () => {
     setModalData({ ...modalData, show: false });
 
     if (modalData.isSuccess) {
-      // Success case: redirect to home.jsp
       window.location.href = "/";
-    } else {
-      // Error case: stay on the same page (do nothing)
     }
   };
+
+  // Auto close modal after 20 seconds
+  useEffect(() => {
+    let timer;
+    if (modalData.show) {
+      timer = setTimeout(() => {
+        handleCloseModal();
+      }, 5000); // 5 seconds = 5000 milliseconds
+    }
+    return () => clearTimeout(timer);
+  }, [modalData.show]);
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light p-4">
